@@ -1,0 +1,12 @@
+@import "/src/pages-css/home.css";
+body {
+  margin: 0;
+  font-family:'Roboto';
+  background-color: white;
+}
+a {
+  text-decoration: none;
+}
+.content{
+  padding-top: 50px;
+}

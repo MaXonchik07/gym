@@ -1,0 +1,339 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.nav-direct{
+    max-width: 100%;
+    padding-inline: 200px;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    height: 50px;
+}
+.butt{
+    width: 100%;
+    border-radius: 10px;
+    background-color: red;
+    border-color: red;
+    color: white;
+}
+.headTxt{
+    color: black;
+    font-size: 15px;
+}
+a:hover{
+    color: red;
+}
+.poss{
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    z-index: 10;   
+}
+.logo{
+    background: url(/images/gantel.png);
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: inherit;
+}
+.block1{
+    background: url("/images/backgroundHome.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 650px;
+    padding-inline: 200px;
+}
+.textBlock{
+    width: 100%;
+}
+.mainText{
+    color: white;
+    font-size: 70px;
+    font-weight: bolder;
+}
+.miniMainText{
+    color: white;
+    font-size: 30px;
+}
+.mainText1{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+.miniMainText2{
+    color: white;
+    font-size: 20px;
+    font-weight: 300;
+}
+.butt1{
+    width: 130px;
+    border-radius: 10px;
+    background-color: red;
+    border-color: red;
+    border-width: 1.5px;
+    color: white;
+    height: 30px;
+    font-weight: 400;
+
+}
+.butt2{
+    width: 130px;
+    border-radius: 10px;
+    background-color: inherit;
+    border-color: white;
+    border-width: 1.5px;
+    color: white;
+    height: 30px;
+    font-weight: 400;
+}
+.butt3{
+    width: 160px;
+    border-radius: 10px;
+    background-color: inherit;
+    border-color: black;
+    border-width: 1.5px;
+    color: black;
+    height: 30px;
+}
+.butt4{
+    width: 200px;
+    border-radius: 10px;
+    background-color: white;
+    border-color: white;
+    border-width: 1.5px;
+    color: red;
+    font-size: 14px;
+    font-weight: 600;
+    height: 30px;
+}
+.whyTextBlock{
+    width: 100%;
+}
+.whyText{
+    font-size: 40px;
+    font-weight: bold;
+}
+.whyDesc{
+    font-size: 15px;
+}
+.block2{
+    padding-inline: 200px;
+    background-color: rgb(247, 247, 247);
+}
+.miniTableImageBack{
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 142, 142, 0.1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.miniTableImage1{
+    width: 40px;
+    height: 40px;
+    background: url(/images/gantel.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: inherit;
+}
+.miniTableImage2{
+    width: 40px;
+    height: 40px;
+    background: url(/images/trainers.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: inherit;
+}
+.miniTableImage3{
+    width: 50px;
+    height: 50px;
+    background: url(/images/medal.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: inherit;
+}
+.miniTableImage4{
+    width: 35px;
+    height: 35px;
+    background: url(/images/hours.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: inherit;
+}
+.miniTable{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.11);
+    height: 100%;
+    width: 10px;
+}
+.miniTableZagolov{
+    font-size: 20px;
+    font-weight: 800;
+}
+.miniTableText{
+    font-size: 14px;
+    font-weight: 500;
+}
+.whyTables{
+    width: 100%;
+    margin: auto;
+}
+.navMinu{
+    padding-right: 0;
+}
+.logoW{
+    padding-right: 5%;
+}
+.headLogoText{
+    font-size: 20px;
+    font-weight: bold;
+}
+.block3{
+    padding-inline: 200px;
+}
+.tablee{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19);
+    height: 100%;
+    width: 10px;
+    overflow: hidden;
+}
+
+.tableBackImage1{
+    position: relative; 
+    background: url("/images/Yoga.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 110%;
+}
+.tableBackImage2{
+    position: relative; 
+    background: url("/images/Strength.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 110%;
+}
+.tableBackImage3{
+    position: relative; 
+    background: url("/images/Cardio.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 110%;
+}
+.tableText{
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+    z-index: 5;
+    text-align: center;
+    padding-left: 10px;
+}
+.classesTables{
+    margin: auto;
+}
+.nameOfClasses{
+    text-align: start;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+.classesDesc{
+    text-align: start;
+    color: white;
+    font-size: 15px;
+    font-weight: 300;
+}
+.schedule{
+    text-align: start;
+    width: 100%;
+    padding-left: 8px;
+    font-size: 14px;
+    font-weight: 400;
+}
+.block4{
+    background-color: red;
+    padding-inline: 200px;
+}
+.footerContacts{
+    padding-inline: 200px;
+    width: 100%;
+    background-color: #101828;
+    color: white;
+}
+.logoFoot{
+    background: url(/images/gantel.png);
+    width: 25px;
+    height: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: inherit;
+}
+.lastLogoText{
+    color: white;
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.logoText{
+    color: white;
+    font-size: 12px;
+    font-weight: 300;
+}
+.footCont{
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+}
+.footContW{
+    width: 80px;
+}
+.footMiniCont{
+    display: flex;
+    justify-content: right;
+}
+.footMain{
+    margin: auto;
+}
+.footerLastText{
+    text-align: center;
+    color: white;
+    opacity: 70%;
+    border-top: 0.5px solid white;
+    background-color: inherit;
+    border-color: gray;
+    font-weight: 300;
+    font-size: 12px;
+}
+.liColor{
+    color: white;
+    font-size: 12px;
+    font-weight: 300;
+}
