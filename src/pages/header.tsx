@@ -12,23 +12,20 @@ function Header(){
                 </div>
                 <div className="row m-0 align-items-center nav-contact">
                     <div className="col navMinu">
-                        <Link to="/" className='headTxt'>Home</Link>
+                        <Link to="/" className='headTxt'>Главная</Link>
                     </div>
                     <div className="col navMinu">
-                        <Link to="/classes" className='headTxt'>Classes</Link>
+                        <Link to="/classes" className='headTxt'>Занятия</Link>
                     </div>
                     <div className="col navMinu">
-                        <Link to="/trainers" className='headTxt'>Trainers</Link>
+                        <Link to="/prices" className='headTxt'>Цены</Link>
                     </div>
                     <div className="col navMinu">
-                        <Link to="/prices" className='headTxt'>Prices</Link>
-                    </div>
-                    <div className="col navMinu">
-                        <Link to="/contact" className='headTxt'>Contact</Link>
+                        <Link to="/contact" className='headTxt'>Контакты</Link>
                     </div>
                     <div className='col navMinu'>
                         <Link to="/">
-                            <button className='butt text-center'>Login</button>
+                            <button className='butt text-center'>Войти</button>
                         </Link>
                     </div>
                 </div>
