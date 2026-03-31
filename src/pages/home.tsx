@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 function Home(){
     return(
@@ -9,11 +9,11 @@ function Home(){
                     <div className="miniMainText text-center">Become the best version of yourself</div>
                     <div className="buttonsUnder d-flex justify-content-center pt-4">
                         <div className="px-2">
-                            <Link to="/">
+                            <Link to="/prices">
                                 <button className='butt1 text-center'>Get Started</button>
                             </Link></div>
                         <div className="pl-3">                        
-                            <Link to="/">
+                            <Link to="/classes">
                                 <button className='butt2 text-center'>View Classes</button>
                             </Link>
                         </div>
@@ -37,22 +37,22 @@ function Home(){
                         <div className="miniTableImageBack">
                             <div className='miniTableImage2'></div>
                         </div>
-                        <div className="miniTableZagolov">Premium Equipment</div>
-                        <div className="miniTableText">State-of-the-art fitness equipment for all your training needs</div>
+                        <div className="miniTableZagolov">Expert Trainers</div>
+                        <div className="miniTableText">Certified professionals dedicated to your fitness journey</div>
                     </div>
                     <div className="col text-center miniTable">
                         <div className="miniTableImageBack">
                             <div className='miniTableImage3'></div>
                         </div>
-                        <div className="miniTableZagolov">Premium Equipment</div>
-                        <div className="miniTableText">State-of-the-art fitness equipment for all your training needs</div>
+                        <div className="miniTableZagolov">Proven Results</div>
+                        <div className="miniTableText">Join thousands who've transformed their lives with us</div>
                     </div>
                     <div className="col text-center miniTable">
                         <div className="miniTableImageBack">
                             <div className='miniTableImage4'></div>
                         </div>
-                        <div className="miniTableZagolov">Premium Equipment</div>
-                        <div className="miniTableText">State-of-the-art fitness equipment for all your training needs</div>
+                        <div className="miniTableZagolov">Flexible Hours</div>
+                        <div className="miniTableText">Open early morning to late night to fit your schedule</div>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@ function Home(){
                     </div>  
                 </div>
                 <div>     
-                    <Link to="/">
+                    <Link to="/classes">
                         <button className='butt3 text-center'>View All Classes</button>
                      </Link>
                 </div>
@@ -102,7 +102,7 @@ function Home(){
                     <div className="miniMainText2 text-center">Join POWERFIT today and get your first week free</div>
                     <div className="buttonsUnder d-flex justify-content-center pt-3">
                         <div>                        
-                            <Link to="/">
+                            <Link to="/prices">
                                 <button className='butt4 text-center'>View Membership Plans</button>
                             </Link>
                         </div>

@@ -1,30 +1,30 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 function Footer(){
     return(
         <>
             <footer className="footerContacts">
                 <div className=" row text-center gap-5 py-4 footMain">
-                    <div className="col">
+                    <div className="col p-0">
                         <div className="text-start d-flex">
                             <div className="logoFoot"></div>
                             <div className="lastLogoText">POWERFIT</div>
                         </div>
                         <div className="logoText text-start pt-2">Transform your body, transform your life. Join the ultimate fitness experience</div>
                     </div>
-                    <div className="col footMiniCont">
+                    <div className="col footMiniCont p-0">
                         <div className="text-start">
                             <div className="footCont">Quick Links</div>
                             <div>
                                 <ul className="list-unstyled">
                                     <li><Link to="/classes" className="liColor">Classes</Link></li>
-                                    <li><Link to="/classes" className="liColor">Trainers</Link></li>
-                                    <li><Link to="/classes" className="liColor">Pricing</Link></li>
+                                    <li><Link to="/trainers" className="liColor">Trainers</Link></li>
+                                    <li><Link to="/prices" className="liColor">Prices</Link></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div className="col footMiniCont">
+                    <div className="col footMiniCont p-0">
                         <div className="text-start">
                             <div className="footCont">Contact</div>
                             <div>
@@ -37,7 +37,7 @@ function Footer(){
                             </div>
                         </div>
                     </div>
-                    <div className="col footMiniCont">
+                    <div className="col footMiniCont p-0">
                         <div className="text-start">
                             <div className="footCont">Hours</div>
                             <div>

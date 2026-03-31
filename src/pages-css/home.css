@@ -296,6 +296,9 @@ a:hover{
     background-size: cover;
     border-color: inherit;
 }
+.logoLink{
+    color: black;
+}
 .lastLogoText{
     color: white;
     padding-left: 10px;
