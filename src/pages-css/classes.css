@@ -1,0 +1,203 @@
+.block1c{
+    padding-inline: 200px;
+    background-color: red;
+    width: 100%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+.block1cCT{
+    width: 100%;
+    color: white;
+}
+.block1cBT{
+    font-size:xx-large;
+    font-weight: 800;
+}
+.block1cT{
+    font-weight: 400;
+    font-size: large;
+}
+.block2c{
+    padding-inline: 200px;
+    padding-bottom: 3%;
+    padding-top: 3%;
+}
+.imageC1{
+    background-image: url(/images/hoursGray.png);
+    width: 19px;
+    height: 19px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.imageC2{
+    background-image: url(/images/peopleGray.png);
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.imageC3{
+    background-image: url(/images/LevelGray.png);
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.tableImageC1{
+    position: relative; 
+    background: url("/images/Yoga.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 110%;
+}
+.tableImageC2{
+    position: relative; 
+    background: url("/images/Strength.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 100%;
+}
+.tableImageC3{
+    position: relative; 
+    background: url("/images/Cardio.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 110%;
+}
+.tableImageC4{
+    position: relative; 
+    background: url("/images/Box.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 100%;
+}
+.tableImageC5{
+    position: relative; 
+    background: url("/images/HIIT.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 100%;
+}
+.tableImageC6{
+    position: relative; 
+    background: url("/images/Bicycle.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 100%;
+}
+.tableImageC7{
+    position: relative; 
+    background: url("/images/SuperYoga.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 100%;
+}
+.tableImageC8{
+    position: relative; 
+    background: url("/images/Fullbody.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 100%;
+}
+.tableImageC9{
+    position: relative; 
+    background: url("/images/OwnWeight.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 280px; 
+    width: 100%;
+}
+.tableC{
+    align-items: center;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19);
+    height: 100%;
+    width: 10px;
+    overflow: hidden;
+}
+.tableTextC{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+    width: 90%;
+}
+.tableTextCW{
+    justify-items: center;
+}
+.tableNameC{
+    font-size: 24px;
+    font-weight: 800;
+}
+.tableDescC{
+    font-weight: 400;
+    font-size: 16px;
+}
+.tableMiniDescC{
+    font-size: 16px;
+    font-weight: 300;
+    align-items: center;
+    padding-left: 5px;
+}
+.tableMiniC{
+    align-items: center;
+    
+}
+.tableMiniC3{
+    align-items: center;
+    padding-bottom: 10px;
+}
+.scheduleC{
+    padding-top: 5px;
+    padding-inline: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.scheduleBlocksC{
+    padding-inline: 20px;
+    font-size: 15px;
+    padding-top: 5px;
+}
+.scheduleBlockC{
+    border-radius: 11px;
+    border: 2px solid black;
+    padding-inline: 1%;
+    margin-left: 1.5%;
+}
+.scheduleBlockC1{
+    border-radius: 11px;
+    border: 2px solid black;
+    padding-inline: 1%;
+}
+.moreButton{
+    width: 90%;
+    border-radius: 11px;
+    background-color: red;
+    border-color: red;
+    border-width: 1.5px;
+    color: white;
+    height: 30px;
+    font-weight: 400;
+}
+.moreButtonW{
+    text-align: center;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}

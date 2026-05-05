@@ -1,4 +1,5 @@
 @import "/src/pages-css/home.css";
+@import "/src/pages-css/classes.css";
 body {
   margin: 0;
   font-family:'Roboto';
