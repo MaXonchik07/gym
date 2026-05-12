@@ -1,0 +1,106 @@
+.block1p{
+    padding-inline: 200px;
+    background-color: red;
+    width: 100%;
+    padding-top: 3%;
+    padding-bottom: 3.5%;
+}
+.block1pCT{
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+.block1pBT{
+    font-size:xx-large;
+    font-weight: 800;
+}
+.block1pT{
+    font-weight: 400;
+    font-size: large;
+}
+.block2p{
+    padding-inline: 200px;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+.priceTable{
+    text-align: center;
+    border-radius: 11px;
+    padding: 2%;
+    height: 800px;
+    flex-direction: column;
+}
+.priceTable1{
+    border: 2px solid #CD7F32;
+}
+.priceTable2{
+    border: 2px solid #C0C0C0;
+}
+.priceTable3{
+    border: 2px solid #FFD700;
+}
+.price{
+    justify-content: center;
+    padding-bottom: 5%;
+}
+.priceText{
+    text-align: start;
+    padding-inline: 5%;
+}
+.priceDesc{
+    font-size: 18px;
+    font-weight: 400;
+    opacity: 80%;
+    padding-bottom: 5%;
+}
+.priceZagolov{
+    font-size: 28px;
+    font-weight: 600;
+    padding-bottom: 5%;
+}
+.markp{
+    background-image: url(/images/checkMark.png);
+    width: 19px;
+    height: 19px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.priceNum{
+    font-size: 40px;
+    font-weight: 600;
+}
+.priceMonth{
+    font-size: 20px;
+    justify-items: center;
+    color: black;
+    opacity: 60%;
+}
+.priceButtonW{
+    text-align: center;
+    margin-top: auto;
+    padding-bottom: 1%;
+}
+.priceButton{
+    width: 100%;
+    border-radius: 11px;
+    border-width: 0px;
+    color: white;
+    height: 30px;
+    font-weight: 400;
+}
+.priceButton1{
+    background-color: #CD7F32;
+    border-color: #CD7F32;
+}
+.priceButton2{
+    background-color: #C0C0C0;
+    border-color: #C0C0C0;
+}
+.priceButton3{
+    background-color: #FFD700;
+    border-color: #FFD700;
+}
+.list{
+    align-items: center;
+}

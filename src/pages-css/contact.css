@@ -1,0 +1,187 @@
+.block1cs{
+    padding-inline: 200px;
+    background-color: red;
+    width: 100%;
+    padding-top: 3%;
+    padding-bottom: 3.5%;
+}
+.block1csCT{
+    width: 100%;
+    color: white;
+}
+.block1csBT{
+    font-size:xx-large;
+    font-weight: 800;
+}
+.block1csT{
+    font-weight: 400;
+    font-size: large;
+}
+.block2cs{
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-inline: 200px;
+}
+.miniTableImageBackcs{
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 142, 142, 0.1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.miniTableImage1cs{
+    width: 40px;
+    height: 40px;
+    background: url(/images/MapPoint.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: inherit;
+}
+.miniTableImage2cs{
+    width: 40px;
+    height: 40px;
+    background: url(/images/PhoneRed.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: inherit;
+}
+.miniTableImage3cs{
+    width: 40px;
+    height: 40px;
+    background: url(/images/MailRed.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: inherit;
+}
+.miniTableImage4cs{
+    width: 40px;
+    height: 40px;
+    background: url(/images/HoursRed.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: inherit;
+}
+.miniTablecs{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.11);
+    height: 235px;
+    width: 10px;
+}
+.miniTableZagolovcs{
+    font-size: 20px;
+    font-weight: 800;
+}
+.miniTableTextcs{
+    font-size: 14px;
+}
+.block3cs{
+    padding-inline: 200px;
+    padding-bottom: 3%;
+}
+.formCS{
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.11);
+    border-radius: 24px;
+    padding: 3%;   
+}
+.questionsCS{
+    margin-bottom: 3%;
+    font-size: 20px;
+    font-weight: 500;
+}
+.nameInputCS{
+    width: 100%;
+    border-radius: 8px;
+    border: 0px;
+    background-color: #F5F5F5;
+    padding: 1%;
+}
+.emailInputCS{
+    width: 100%;
+    border-radius: 8px;
+    border: 0px;
+    background-color: #F5F5F5;
+    padding: 1%;
+}
+.phoneInputCS{
+    width: 100%;
+    border-radius: 8px;
+    border: 0px;
+    background-color: #F5F5F5;
+    padding: 1%;
+}
+.themeInputCS{
+    width: 100%;
+    border-radius: 8px;
+    border: 0px;
+    background-color: #F5F5F5;
+    padding: 1%;
+}
+.textareaCS{
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+    border: 0px;
+    background-color: #F5F5F5;
+    padding: 1%;
+    resize: none;
+    overflow: hidden;
+}
+.textCS{
+    font-size: 16px;
+    font-weight: 500;
+}
+.textCS1{
+    font-size: 16px;
+}
+.submitCS{
+    background-color: red;
+    width: 100%;
+    color: white;
+    border-radius: 8px;
+    border: 0px;
+}
+.mapCS{
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.11);
+}
+.oftenQuestions{
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.11);
+    border: 0px;
+    padding: 2%;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+.queBlock{
+    border-radius: 24px;
+    border: 1px solid #c5c5c5;
+    padding: 1.5%;
+}
+.queBlocksZagolov{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+.queZagolov{
+    font-size: 16px;
+    font-weight: 500; 
+}
+.queText{
+    font-size: 14px;
+    font-weight: 400;  
+}

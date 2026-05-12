@@ -1,5 +1,7 @@
 @import "/src/pages-css/home.css";
 @import "/src/pages-css/classes.css";
+@import "/src/pages-css/prices.css";
+@import "/src/pages-css/contact.css";
 body {
   margin: 0;
   font-family:'Roboto';
