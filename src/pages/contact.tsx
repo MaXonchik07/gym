@@ -1,4 +1,3 @@
-
 function Contact() {
     const textarea = document.querySelector('textarea');
     textarea?.addEventListener('input', function(){

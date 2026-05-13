@@ -4,6 +4,7 @@ import Home from "./pages/home";
 import Classes from "./pages/classes";
 import Prices from "./pages/prices";
 import Contact from "./pages/contact";
+import Profile from "./pages/profile";
 
 function App(){
     return(
@@ -14,6 +15,7 @@ function App(){
                     <Route path = "/classes" element = {<Classes/>}/>
                     <Route path = "/prices" element = {<Prices/>}/>
                     <Route path = "/contact" element = {<Contact/>}/>
+                    <Route path = "/profile" element = {<Profile/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

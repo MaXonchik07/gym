@@ -1,0 +1,19 @@
+.block1pfl{
+    padding-inline: 200px;
+    background-color: red;
+    width: 100%;
+    padding-top: 3%;
+    padding-bottom: 3.5%;
+}
+.block1pflCT{
+    width: 100%;
+    color: white;
+}
+.block1pflBT{
+    font-size:xx-large;
+    font-weight: 800;
+}
+.block1pflT{
+    font-weight: 400;
+    font-size: large;
+}
