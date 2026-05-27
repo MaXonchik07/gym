@@ -44,7 +44,7 @@ function Classes() {
                             <div className="scheduleBlockC">Пятница 19:00</div>
                         </div>
                         <div className="moreButtonW">
-                            <Link to="/"><button className="moreButton">Подробнее</button></Link>
+                            <Link to="/yoga"><button className="moreButton">Подробнее</button></Link>
                         </div>
                     </div>
                     <div className="col px-0 tableC">

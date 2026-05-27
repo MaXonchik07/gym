@@ -3,6 +3,8 @@
 @import "/src/pages-css/prices.css";
 @import "/src/pages-css/contact.css";
 @import "/src/pages-css/profile.css";
+@import "/src/pages-css/profile1.css";
+@import "/src/pages-css/classesD.css";
 body {
   margin: 0;
   font-family:'Roboto';

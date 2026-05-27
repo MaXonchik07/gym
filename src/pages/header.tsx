@@ -1,22 +1,16 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 import Auth from "./auth";
 
 function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [currentUser, setCurrentUser] = useState(null);
-
-    useEffect(() => {
-        const user = localStorage.getItem("currentUser");
-        if (user) {
-            setCurrentUser(JSON.parse(user));
-        }
-    }, []);
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem("currentUser");
-        setCurrentUser(null);
-        window.location.reload();
+        logout();
+        navigate("/"); 
     };
 
     return (
@@ -42,13 +36,17 @@ function Header() {
                         <div className="col navMinu">
                             <Link to="/contact" className='headTxt'>Контакты</Link>
                         </div>
-                        {currentUser ? (
-                            <div className="col navMinu" style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                                <Link to="/profile" className="headTxt">
-                                    {currentUser.firstName}
-                                </Link>
-                                <button className='butt text-center' onClick={handleLogout}>Выйти</button>
-                            </div>) : (
+                        {user ? (
+                            <>
+                                <div className="col navMinu" >
+                                    <Link to="/profile" className="headTxt">
+                                        {user.firstName}
+                                    </Link>
+                                </div>
+                                <div className="col navMinu">
+                                    <button className='butt text-center' onClick={handleLogout}>Выйти</button>
+                                </div>
+                            </>) : (
                             <div className='col navMinu'>
                                 <button className='butt text-center' id="logButt" onClick={() => setIsModalOpen(true)}>Войти</button>
                             </div>
