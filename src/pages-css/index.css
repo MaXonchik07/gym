@@ -5,6 +5,7 @@
 @import "/src/pages-css/profile.css";
 @import "/src/pages-css/profile1.css";
 @import "/src/pages-css/classesD.css";
+@import "/src/pages-css/chat.css";
 body {
   margin: 0;
   font-family:'Roboto';
