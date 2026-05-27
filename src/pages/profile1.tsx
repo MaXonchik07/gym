@@ -104,11 +104,8 @@ export default function ProfileStyled() {
 
   return (
     <>
-      {/* Кастомное уведомление */}
       {notification && <div className="custom-toast">{notification}</div>}
-
-      {/* Header — как block1cs */}
-      <section className="profile-header">
+      <div className="profile-header">
         <div className="profile-header-content">
           <h1 className="profile-header-title">
             Привет, {isEditing ? "..." : user.firstName ?? "Гость"}!
@@ -117,16 +114,12 @@ export default function ProfileStyled() {
             Добро пожаловать в ваш личный кабинет
           </p>
         </div>
-      </section>
-
-      {/* Основной контейнер */}
+      </div>
       <div className="profile-container mx-0">
         <div className="row gap-5 mx-0">
-          {/* Левая колонка — карточка профиля */}
           <div className="col-4 p-0">
             <div className="profile-card">
               <div className="profile-card-title">Информация о профиле</div>
-
               <div className="d-flex align-items-center gap-3 mb-4">
                 <div className="avatar-circle">
                   <span>
