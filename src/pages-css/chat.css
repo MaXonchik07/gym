@@ -48,13 +48,16 @@
 .chat-messages {
   flex: 1;
   overflow-y: auto;
-  padding: 12px;
+  padding: 2%;
   background: #f9fafb;
 }
 
-.chat-message {
-  margin-bottom: 10px;
-  max-width: 80%;
+.chat-message:not(.own) {
+  text-align: start;
+}
+ 
+.chat-message.own {
+  text-align: end;
 }
 
 .chat-message.own {
