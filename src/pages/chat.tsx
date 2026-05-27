@@ -24,11 +24,18 @@ function Chat() {
     wsRef.current = ws;
 
     ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (Array.isArray(data)) {
-        setMessages(data);
-      } else {
-        setMessages((prev) => [...prev, data]);
+      try {
+        const data = JSON.parse(event.data);
+        if (Array.isArray(data)) {
+          // история – берём только объекты с полем content
+          setMessages(data.filter((msg) => msg && msg.content));
+        } else if (data && data.content) {
+          // новое сообщение чата
+          setMessages((prev) => [...prev, data]);
+        }
+        // уведомления о бронировании (без content) игнорируются
+      } catch (e) {
+        console.error("WebSocket message parse error", e);
       }
     };
 
