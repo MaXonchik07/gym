@@ -8,6 +8,7 @@ export interface User {
   phone: string;
   joinDate: string;
   membershipType: "Basic" | "Premium" | "Elite";
+  role?: "user" | "admin";
 }
 
 export interface Booking {
@@ -29,6 +30,8 @@ interface AuthContextType {
   addBooking: (booking: Omit<Booking, "id">) => void;
   updateMembership: (planName: string) => Promise<void>;
   updateUserProfile: (updatedFields: Partial<User>) => Promise<{ success: boolean; error?: string }>;
+  fetchBookings: () => Promise<void>;
+  refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -44,12 +47,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [bookings, setBookings] = useState<Booking[]>(() => {
-    const saved = localStorage.getItem("bookings");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [bookings, setBookings] = useState<Booking[]>([]);
 
-  // Синхронизация с localStorage
   useEffect(() => {
     if (user) {
       localStorage.setItem("currentUser", JSON.stringify(user));
@@ -82,8 +81,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setBookings([]);
   };
 
-  const cancelBooking = (id: string) => {
-    setBookings((prev) => prev.filter((b) => b.id !== id));
+  const cancelBooking = async (id: string) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    try {
+      const res = await fetch(`http://localhost:8081/api/bookings/cancel?id=${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        setBookings((prev) => prev.filter((b) => b.id !== id));
+      } else {
+        console.error("Не удалось отменить бронь на сервере");
+      }
+    } catch (err) {
+      console.error("Ошибка сети при отмене", err);
+    }
   };
 
   const addBooking = (booking: Omit<Booking, "id">) => {
@@ -95,44 +109,121 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const updateMembership = async (planName: string) => {
-    if (!user) return;
-    const updatedUser = { ...user, membershipType: planName as User["membershipType"] };
-    setUser(updatedUser);
-    setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
-    localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+    const token = localStorage.getItem("token");
+    if (!token || !user) return;
+    try {
+      const res = await fetch("http://localhost:8080/api/auth/membership", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ membership_type: planName }),
+      });
+      if (res.ok) {
+        await refreshUser();
+      } else {
+        throw new Error("Не удалось обновить тариф");
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const updateUserProfile = async (
-    updatedFields: Partial<User>
-  ): Promise<{ success: boolean; error?: string }> => {
-    if (!user) return { success: false, error: "Пользователь не авторизован" };
-
-    const newEmail = updatedFields.email?.trim().toLowerCase();
-    const newPhone = updatedFields.phone?.trim();
-
-    if (newEmail) {
-      const emailTaken = users.some(
-        (u) => u.id !== user.id && u.email.toLowerCase() === newEmail
-      );
-      if (emailTaken) {
-        return { success: false, error: "Этот email уже используется другим пользователем" };
+  const updateUserProfile = async (updatedFields: Partial<User>) => {
+    const token = localStorage.getItem("token");
+    if (!token || !user) return { success: false, error: "Нет токена" };
+    try {
+      const res = await fetch("http://localhost:8080/api/auth/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          first_name: updatedFields.firstName,
+          last_name: updatedFields.lastName,
+          email: updatedFields.email,
+          phone: updatedFields.phone,
+        }),
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        return { success: false, error: text || "Ошибка обновления" };
       }
+      const rawUser = await res.json();
+      const updatedUser = {
+        id: rawUser.id,
+        firstName: rawUser.first_name,
+        lastName: rawUser.last_name,
+        email: rawUser.email,
+        phone: rawUser.phone,
+        membershipType: rawUser.membership_type,
+        role: rawUser.role || "user",
+        joinDate: rawUser.join_date,
+      };
+      setUser(updatedUser);
+      localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+      return { success: true };
+    } catch (err: any) {
+      return { success: false, error: err.message };
     }
+  };
 
-    if (newPhone) {
-      const phoneTaken = users.some(
-        (u) => u.id !== user.id && u.phone === newPhone
-      );
-      if (phoneTaken) {
-        return { success: false, error: "Этот номер телефона уже используется другим пользователем" };
+  const fetchBookings = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    try {
+      const res = await fetch("http://localhost:8081/api/bookings", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setBookings(data);
+        } else {
+          setBookings([]);
+        }
+      } else {
+        setBookings([]);
       }
+    } catch (err) {
+      console.error("Failed to fetch bookings", err);
+      setBookings([]);
     }
+  };
 
-    const updatedUser = { ...user, ...updatedFields };
-    setUser(updatedUser);
-    setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
-    localStorage.setItem("currentUser", JSON.stringify(updatedUser));
-    return { success: true };
+  useEffect(() => {
+    if (user) {
+      fetchBookings();
+    }
+  }, [user]);
+
+  const refreshUser = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    try {
+      const res = await fetch("http://localhost:8080/api/auth/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        const rawUser = await res.json();
+        const updatedUser = {
+          id: rawUser.id,
+          firstName: rawUser.first_name,
+          lastName: rawUser.last_name,
+          email: rawUser.email,
+          phone: rawUser.phone,
+          membershipType: rawUser.membership_type,
+          role: rawUser.role || "user",
+          joinDate: rawUser.join_date,
+        };
+        setUser(updatedUser);
+        localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+      }
+    } catch (err) {
+      console.error("Не удалось обновить пользователя", err);
+    }
   };
 
   return (
@@ -147,6 +238,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         addBooking,
         updateMembership,
         updateUserProfile,
+        fetchBookings,
+        refreshUser,
       }}
     >
       {children}

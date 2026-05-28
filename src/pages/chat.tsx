@@ -4,6 +4,7 @@ import { useAuth } from "../AuthContext";
 interface Message {
   id: string;
   sender_id: string;
+  recipient_id?: string;
   content: string;
   created_at: string;
 }
@@ -18,7 +19,9 @@ function Chat() {
   const [isConnected, setIsConnected] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const senderId = user?.id ? String(user.id) : "guest-" + Math.random().toString(36).substr(2, 9);
+
+  const senderId = user?.id ? String(user.id) : "";
+  const isAdmin = user?.role === "admin";
 
   const connect = useCallback(() => {
     if (globalWs) {
@@ -26,23 +29,19 @@ function Chat() {
       globalWs = null;
     }
 
-    const ws = new WebSocket("ws://localhost:8081/ws");
+    const params = senderId ? `?user_id=${encodeURIComponent(senderId)}` : "";
+    const wsUrl = `ws://localhost:8081/ws${params}`;
+    const ws = new WebSocket(wsUrl);
     globalWs = ws;
-    console.log("[Chat] Connecting to WebSocket...");
 
-    ws.onopen = () => {
-      console.log("[Chat] WebSocket connected");
-      setIsConnected(true);
-    };
+    ws.onopen = () => setIsConnected(true);
 
     ws.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
         if (Array.isArray(data)) {
-          console.log("[Chat] History received:", data.length, "messages");
           setMessages(data);
         } else if (data && data.content) {
-          console.log("[Chat] New message:", data);
           setMessages((prev) => [...prev, data]);
         }
       } catch (e) {
@@ -50,21 +49,15 @@ function Chat() {
       }
     };
 
-    ws.onclose = (e) => {
-      console.log("[Chat] WebSocket closed, code:", e.code, "reason:", e.reason);
+    ws.onclose = () => {
       setIsConnected(false);
       globalWs = null;
       if (reconnectTimeoutRef.current) clearTimeout(reconnectTimeoutRef.current);
-      reconnectTimeoutRef.current = setTimeout(() => {
-        console.log("[Chat] Reconnecting...");
-        connect();
-      }, 3000);
+      reconnectTimeoutRef.current = setTimeout(connect, 3000);
     };
 
-    ws.onerror = (e) => {
-      console.error("[Chat] WebSocket error", e);
-    };
-  }, []);
+    ws.onerror = (e) => console.error("[Chat] WebSocket error", e);
+  }, [senderId]);
 
   useEffect(() => {
     connect();
@@ -77,13 +70,22 @@ function Chat() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  useEffect(() => {
+    if (isOpen && messages.length > 0) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
+    }
+  }, [isOpen, messages.length]);
+
   const sendMessage = () => {
     if (!input.trim()) return;
-    if (!globalWs || globalWs.readyState !== WebSocket.OPEN) {
-      console.error("[Chat] WebSocket not open");
-      return;
+    if (!globalWs || globalWs.readyState !== WebSocket.OPEN) return;
+    const payload: any = {
+      content: input.trim(),
+    };
+    if (isAdmin) {
+    } else {
+      payload.recipient_id = "support";
     }
-    const payload = { sender_id: senderId, content: input.trim() };
     globalWs.send(JSON.stringify(payload));
     setInput("");
   };
@@ -103,7 +105,7 @@ function Chat() {
   return (
     <div className="chat-window">
       <div className="chat-header">
-        <span>Поддержка</span>
+        <div>Поддержка</div>
         <button className="chat-close" onClick={() => setIsOpen(false)}>✖</button>
       </div>
       <div className="chat-messages">
@@ -129,12 +131,10 @@ function Chat() {
           onKeyDown={handleKeyDown}
           disabled={!isConnected}
         />
-        <button onClick={sendMessage} disabled={!isConnected}>
-          ➤
-        </button>
+        <button onClick={sendMessage} disabled={!isConnected}>➤</button>
       </div>
     </div>
   );
 }
 
-export default Chat 
+export default Chat

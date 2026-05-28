@@ -2,13 +2,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./pages/home";
 import Classes from "./pages/classes";
-import Prices from "./pages/prices";
 import Contact from "./pages/contact";
-import Profile from "./pages/profile";
-import ProfileStyled from "./pages/profile1";
+import ProfileStyled from "./pages/profile";
 import { AuthProvider } from "./AuthContext";
 import YogaDetail from "./pages/classes/yoga";
-import Prices1 from "./pages/prices1";
+import Prices1 from "./pages/prices";
 
 function App() {
     return (

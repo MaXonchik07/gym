@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "../AuthContext"; 
 import "./auth.css";
 
 function Auth({ isOpen, onClose }) {
@@ -11,10 +12,15 @@ function Auth({ isOpen, onClose }) {
                 <button className="closeButt" onClick={onClose}>×</button>
                 <div className="authTW">
                     <div className="authBT">Добро пожаловать в POWERFIT</div>
-                    <div className="authT">Войдите в свой аккаунт или зарегистрируйтесь для начала</div>
+                    <div className="authT">
+                        Войдите в свой аккаунт или зарегистрируйтесь для начала
+                    </div>
                 </div>
-                {mode === "login" ?
-                    (<LoginForm onSwitchToRegister={() => setMode("register")} />) : (<RegisterForm onSwitchToLogin={() => setMode("login")} />)}
+                {mode === "login" ? (
+                    <LoginForm onSwitchToRegister={() => setMode("register")} />
+                ) : (
+                    <RegisterForm onSwitchToLogin={() => setMode("login")} />
+                )}
             </div>
         </div>
     );
@@ -24,33 +30,77 @@ function LoginForm({ onSwitchToRegister }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const { fetchBookings } = useAuth();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const users = JSON.parse(localStorage.getItem("users") || "[]");
-        const user = users.find(u => u.email === email && u.password === password);
-        if (user) {
-            localStorage.setItem("currentUser", JSON.stringify(user));
+        try {
+            const res = await fetch("http://localhost:8080/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
+            if (!res.ok) {
+                const text = await res.text();
+                setError(text || "Ошибка входа");
+                return;
+            }
+            const data = await res.json();
+            localStorage.setItem("token", data.token);
+            const userRes = await fetch("http://localhost:8080/api/auth/me", {
+                headers: { Authorization: `Bearer ${data.token}` },
+            });
+            if (userRes.ok) {
+                const rawUser = await userRes.json();
+                const user = {
+                    id: rawUser.id,
+                    firstName: rawUser.first_name,
+                    lastName: rawUser.last_name,
+                    email: rawUser.email,
+                    phone: rawUser.phone,
+                    membershipType: rawUser.membership_type,
+                    role: rawUser.role || "user",
+                    joinDate: rawUser.join_date,
+                };
+
+                localStorage.setItem("currentUser", JSON.stringify(user));
+            }
+            await fetchBookings();
             window.location.reload();
-        } else {
-            setError("Неверный email или пароль");
+        } catch (err) {
+            setError("Сервер недоступен");
         }
     };
 
     return (
         <form className="authForm" onSubmit={handleSubmit}>
             {error && <div className="error">{error}</div>}
-
             <div className="authForm">
                 <label className="d-flex mb-1 inputText">Email</label>
-                <input className="mb-1 authInput" type="email" placeholder="ivanIvanov@mail.ru" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <input
+                    className="mb-1 authInput"
+                    type="email"
+                    placeholder="ivanIvanov@mail.ru"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
                 <label className="d-flex mb-1 inputText">Пароль</label>
-                <input className="mb-1 authInput" type="password" placeholder="*******" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <input
+                    className="mb-1 authInput"
+                    type="password"
+                    placeholder="*******"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
             </div>
             <button type="submit" className="submitButt">Войти</button>
             <div className="authToRegButt d-flex">
                 <div className="authToRegButtText">Ещё нет своего аккаунта?</div>
-                <button type="button" className="linkButt" onClick={onSwitchToRegister}>Зарегистрируйтесь</button>
+                <button type="button" className="linkButt" onClick={onSwitchToRegister}>
+                    Зарегистрируйтесь
+                </button>
             </div>
         </form>
     );
@@ -63,35 +113,64 @@ function RegisterForm({ onSwitchToLogin }) {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const { fetchBookings } = useAuth();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (password.length < 6) {
             setError("Пароль должен быть не менее 6 символов");
             return;
         }
-        const users = JSON.parse(localStorage.getItem("users") || "[]");
-        if (users.find(u => u.email === email)) {
-            setError("Пользователь с таким email уже существует");
-            return;
-        } else if (users.find(u => u.phone === phone)) {
-            setError("Пользователь с таким телефоном уже существует");
-            return;
+        try {
+            const res = await fetch("http://localhost:8080/api/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    first_name: firstName,
+                    last_name: surName,
+                    email,
+                    phone,
+                    password,
+                }),
+            });
+            if (!res.ok) {
+                const text = await res.text();
+                setError(text || "Ошибка регистрации");
+                return;
+            }
+            const loginRes = await fetch("http://localhost:8080/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
+            if (loginRes.ok) {
+                const data = await loginRes.json();
+                localStorage.setItem("token", data.token);
+                const userRes = await fetch("http://localhost:8080/api/auth/me", {
+                    headers: { Authorization: `Bearer ${data.token}` },
+                });
+                if (userRes.ok) {
+                    const rawUser = await userRes.json();
+                    const user = {
+                        id: rawUser.id,
+                        firstName: rawUser.first_name,
+                        lastName: rawUser.last_name,
+                        email: rawUser.email,
+                        phone: rawUser.phone,
+                        membershipType: rawUser.membership_type,
+                        role: rawUser.role || "user",
+                        joinDate: rawUser.join_date,
+                    };
+                    localStorage.setItem("currentUser", JSON.stringify(user));
+                }
+                await fetchBookings();
+                window.location.reload();
+            } else {
+                setError("Регистрация прошла, но не удалось войти");
+            }
+        } catch (err) {
+            setError("Сервер недоступен");
         }
-
-        const newUser = {
-            id: Date.now(),
-            firstName: firstName,
-            surName: surName,
-            email: email,
-            phone: phone,
-            password: password
-        };
-
-        users.push(newUser);
-        localStorage.setItem("users", JSON.stringify(users));
-        localStorage.setItem("currentUser", JSON.stringify(newUser));
-        window.location.reload();
     };
 
     return (

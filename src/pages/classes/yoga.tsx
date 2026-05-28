@@ -12,7 +12,6 @@ export default function YogaDetail() {
     instructor: string;
   } | null>(null);
 
-  // ---------- ДАННЫЕ ЗАНЯТИЯ ----------
   const classData = {
     id: "yoga",
     name: "Yoga Flow",
@@ -21,7 +20,7 @@ export default function YogaDetail() {
     image:
       "https://images.unsplash.com/photo-1651077837628-52b3247550ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b2dhJTIwY2xhc3MlMjBzdHVkaW98ZW58MXx8fHwxNzc0MzcxNjA2fDA&ixlib=rb-4.1.0&q=80&w=1080",
     duration: "60 мин",
-    capacity: "20",
+    capacity: "3",
     difficulty: "Beginner",
     schedule: [
       { day: "Понедельник", time: "07:00", instructor: "Анна Иванова" },
@@ -36,7 +35,6 @@ export default function YogaDetail() {
       "Улучшение баланса",
     ],
   };
-  // --------------------------------
 
   const showNotification = (msg: string) => {
     setNotification(msg);
@@ -52,7 +50,6 @@ export default function YogaDetail() {
     }
   };
 
-  // Генерация слотов на 14 дней
   const upcomingSlots = useMemo(() => {
     const slots: { date: string; time: string; instructor: string }[] = [];
     const today = new Date();
@@ -77,44 +74,60 @@ export default function YogaDetail() {
     return slots;
   }, [classData.schedule]);
 
-  const handleBook = () => {
+  const handleBook = async () => {
     if (!user) {
       showNotification("Пожалуйста, войдите в систему для записи");
       return;
     }
     if (!selectedSlot) {
-      showNotification("Сначала выберите время");
       return;
     }
 
-    const alreadyBooked = bookings.some(
-      (b) =>
-        b.classId === classData.id &&
-        b.date === selectedSlot.date &&
-        b.time === selectedSlot.time
-    );
-    if (alreadyBooked) {
-      showNotification("Вы уже записаны на это занятие");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      showNotification("Ошибка авторизации. Попробуйте войти заново.");
       return;
     }
 
-    addBooking({
-      classId: classData.id,
-      className: classData.name,
+    const payload = {
+      class_id: classData.id,
+      class_name: classData.name,
+      instructor: selectedSlot.instructor,
       date: selectedSlot.date,
       time: selectedSlot.time,
-      instructor: selectedSlot.instructor,
-    });
-    showNotification("Успешно записались!");
-    setSelectedSlot(null);
+      capacity: parseInt(classData.capacity, 10), 
+    };
+
+    try {
+      const res = await fetch("http://localhost:8081/api/bookings/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        showNotification(errText || "Ошибка записи");
+        return;
+      }
+
+      showNotification("Успешно записались!");
+      setSelectedSlot(null);
+
+    } catch (error) {
+      console.error("Booking error", error);
+      showNotification("Ошибка сети при записи");
+    }
   };
 
   return (
     <>
       {notification && <div className="custom-toast">{notification}</div>}
 
-      {/* Hero */}
-      <section className="class-hero" style={{ backgroundImage: `url('${classData.image}')` }}>
+      <div className="class-hero" style={{ backgroundImage: `url('${classData.image}')` }}>
         <div className="class-hero-overlay yogaIMG">
           <div className="class-hero-content">
             <button className="btn-back" onClick={() => navigate("/classes")}>
@@ -130,9 +143,7 @@ export default function YogaDetail() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Контент */}
+      </div>
       <div className="class-container">
         <div className="row gap-5 mx-0">
           <div className="col-lg-8">
@@ -152,7 +163,6 @@ export default function YogaDetail() {
               </div>
             </div>
           </div>
-
           <div className="col-lg">
             <div className="profile-card">
               <h2 className="profile-card-title">О занятии</h2>
@@ -181,8 +191,6 @@ export default function YogaDetail() {
             </div>
           </div>
         </div>
-
-        {/* Блок с выбором времени */}
         <div className="profile-card mt-4" id="slots-section">
           <h2 className="profile-card-title">Ближайшие занятия</h2>
           <div className="vertical-slots-container">
@@ -211,13 +219,7 @@ export default function YogaDetail() {
               );
             })}
           </div>
-          <button
-            className="btn-red w-100 mt-3"
-            disabled={!selectedSlot}
-            onClick={handleBook}
-          >
-            Записаться
-          </button>
+          <button className="btn-red w-100 mt-3" disabled={!selectedSlot} onClick={handleBook}>Записаться</button>
         </div>
       </div>
     </>
