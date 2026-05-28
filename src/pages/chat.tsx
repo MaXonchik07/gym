@@ -9,9 +9,14 @@ interface Message {
   created_at: string;
 }
 
+interface Props {
+  recipientId?: string;
+  adminMode?: boolean;
+}
+
 let globalWs: WebSocket | null = null;
 
-function Chat() {
+const Chat: React.FC<Props> = ({ recipientId, adminMode }) => {
   const { user } = useAuth();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -20,8 +25,20 @@ function Chat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const senderId = user?.id ? String(user.id) : "";
+  const senderId = user?.id ? String(user.id) : "guest-" + Math.random().toString(36).substr(2, 9);
   const isAdmin = user?.role === "admin";
+
+  useEffect(() => {
+    if (!adminMode || !recipientId) return;
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    fetch(`http://localhost:8081/api/admin/chat-history?user_id=${recipientId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => setMessages(data))
+      .catch(console.error);
+  }, [recipientId, adminMode]);
 
   const connect = useCallback(() => {
     if (globalWs) {
@@ -40,9 +57,43 @@ function Chat() {
       try {
         const data = JSON.parse(event.data);
         if (Array.isArray(data)) {
-          setMessages(data);
-        } else if (data && data.content) {
-          setMessages((prev) => [...prev, data]);
+          if (adminMode && recipientId) {
+            const filtered = data.filter(
+              (msg: Message) =>
+                (msg.sender_id === recipientId && msg.recipient_id === senderId) ||
+                (msg.sender_id === senderId && msg.recipient_id === recipientId)
+            );
+            setMessages(filtered);
+          } else if (!adminMode) {
+            const filtered = data.filter(
+              (msg: Message) =>
+                msg.sender_id === senderId ||
+                msg.recipient_id === senderId ||
+                msg.recipient_id === "support"
+            );
+            setMessages(filtered);
+          } else {
+            setMessages([]);
+          }
+          return;
+        }
+        if (data && data.content) {
+          if (adminMode && recipientId) {
+            if (
+              (data.sender_id === recipientId && data.recipient_id === senderId) ||
+              (data.sender_id === senderId && data.recipient_id === recipientId)
+            ) {
+              setMessages((prev) => [...prev, data]);
+            }
+          } else if (!adminMode) {
+            if (
+              data.recipient_id === senderId ||
+              data.sender_id === senderId ||
+              data.recipient_id === "support"
+            ) {
+              setMessages((prev) => [...prev, data]);
+            }
+          }
         }
       } catch (e) {
         console.error("[Chat] Parse error", e);
@@ -57,7 +108,7 @@ function Chat() {
     };
 
     ws.onerror = (e) => console.error("[Chat] WebSocket error", e);
-  }, [senderId]);
+  }, [senderId, adminMode, recipientId]);
 
   useEffect(() => {
     connect();
@@ -79,13 +130,10 @@ function Chat() {
   const sendMessage = () => {
     if (!input.trim()) return;
     if (!globalWs || globalWs.readyState !== WebSocket.OPEN) return;
-    const payload: any = {
-      content: input.trim(),
-    };
-    if (isAdmin) {
-    } else {
-      payload.recipient_id = "support";
-    }
+
+    const payload: any = { content: input.trim() };
+    payload.recipient_id = adminMode && recipientId ? recipientId : "support";
+
     globalWs.send(JSON.stringify(payload));
     setInput("");
   };
@@ -94,7 +142,7 @@ function Chat() {
     if (e.key === "Enter") sendMessage();
   };
 
-  if (!isOpen) {
+  if (!isOpen && !isAdmin) {
     return (
       <div className="chat-bubble" onClick={() => setIsOpen(true)}>
         Чат поддержки
@@ -102,11 +150,17 @@ function Chat() {
     );
   }
 
+  if (adminMode && !recipientId) {
+    return null;
+  }
+
   return (
     <div className="chat-window">
       <div className="chat-header">
-        <div>Поддержка</div>
-        <button className="chat-close" onClick={() => setIsOpen(false)}>✖</button>
+        <span>{adminMode && recipientId ? `Диалог с ${recipientId}` : "Поддержка"}</span>
+        {!adminMode && (
+          <button className="chat-close" onClick={() => setIsOpen(false)}>✖</button>
+        )}
       </div>
       <div className="chat-messages">
         {messages.map((msg) => (
@@ -125,7 +179,7 @@ function Chat() {
       <div className="chat-input">
         <input
           type="text"
-          placeholder={isConnected ? "Введите сообщение..." : "Ожидание подключения..."}
+          placeholder="Введите сообщение..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -135,6 +189,6 @@ function Chat() {
       </div>
     </div>
   );
-}
+};
 
-export default Chat
+export default Chat;

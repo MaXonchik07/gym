@@ -1,6 +1,7 @@
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import Chat from "./chat";
 
 function Profile() {
   const { user, bookings, cancelBooking, updateUserProfile } = useAuth();
@@ -15,6 +16,21 @@ function Profile() {
     phone: "",
   });
   const [editError, setEditError] = useState("");
+  const [adminChatUsers, setAdminChatUsers] = useState<string[]>([]);
+  const [selectedChatUser, setSelectedChatUser] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (user?.role === "admin") {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      fetch("http://localhost:8081/api/admin/chat-users", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((data) => setAdminChatUsers(data))
+        .catch(console.error);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!user) {
@@ -97,9 +113,45 @@ function Profile() {
     }
   };
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    value = value.replace(/[^0-9+]/g, '');
+    if (value.indexOf('+') > 0) {
+      value = value.slice(0, value.indexOf('+')) + value.slice(value.indexOf('+') + 1);
+    }
+    setEditForm({ ...editForm, phone: value });
+  };
+
   return (
     <>
       {notification && <div className="custom-toast">{notification}</div>}
+      {user?.role === "admin" && (
+        <div className="profile-card">
+          <h2 className="profile-card-title">Поддержка</h2>
+          {selectedChatUser ? (
+            <>
+              <button className="btn-outline-red mb-3" onClick={() => setSelectedChatUser(null)}>
+                ← Назад к списку
+              </button>
+              <Chat recipientId={selectedChatUser} adminMode />
+            </>
+          ) : (
+            <div className="admin-chat-list">
+              {adminChatUsers.length === 0 && <p>Нет обращений</p>}
+              {adminChatUsers.map((uid) => (
+                <div
+                  key={uid}
+                  className="admin-chat-user"
+                  onClick={() => setSelectedChatUser(uid)}
+                  style={{ cursor: "pointer", padding: "8px", borderBottom: "1px solid #eee" }}
+                >
+                  {uid}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
       <div className="profile-header">
         <div className="profile-header-content">
           <h1 className="profile-header-title">
