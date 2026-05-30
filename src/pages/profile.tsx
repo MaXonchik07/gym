@@ -16,18 +16,21 @@ function Profile() {
     phone: "",
   });
   const [editError, setEditError] = useState("");
-  const [adminChatUsers, setAdminChatUsers] = useState<string[]>([]);
-  const [selectedChatUser, setSelectedChatUser] = useState<string | null>(null);
+  const [adminChatUsers, setAdminChatUsers] = useState<{ user_id: string; first_name: string; last_name: string }[]>([]);
+  const [selectedChatUser, setSelectedChatUser] = useState<{ userId: string; firstName: string; lastName: string } | null>(null);
 
   useEffect(() => {
     if (user?.role === "admin") {
       const token = localStorage.getItem("token");
       if (!token) return;
-      fetch("http://localhost:8081/api/admin/chat-users", {
+      fetch("http://localhost:8081/api/admin/chat-users-with-names", {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
-        .then((data) => setAdminChatUsers(data))
+        .then((data) => {
+          const filtered = data.filter((u: any) => u.user_id !== user.id);
+          setAdminChatUsers(filtered);
+        })
         .catch(console.error);
     }
   }, [user]);
@@ -238,21 +241,22 @@ function Profile() {
                       ← Назад к списку
                     </button>
                     <Chat
-                      recipientId={selectedChatUser}
+                      recipientId={selectedChatUser.userId}
+                      recipientName={`${selectedChatUser.firstName} ${selectedChatUser.lastName}`}
                       adminMode
                     />
                   </>
                 ) : (
                   <div className="admin-chat-list">
                     {adminChatUsers.length === 0 && <p>Нет обращений</p>}
-                    {adminChatUsers.map((uid) => (
+                    {adminChatUsers.map((u) => (
                       <div
-                        key={uid}
+                        key={u.user_id}
                         className="admin-chat-user"
-                        onClick={() => setSelectedChatUser(uid)}
+                        onClick={() => setSelectedChatUser({ userId: u.user_id, firstName: u.first_name, lastName: u.last_name })}
                         style={{ cursor: "pointer", padding: "8px", borderBottom: "1px solid #eee" }}
                       >
-                        {uid}
+                        {u.first_name} {u.last_name} (ID: {u.user_id})
                       </div>
                     ))}
                   </div>
