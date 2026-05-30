@@ -125,33 +125,6 @@ function Profile() {
   return (
     <>
       {notification && <div className="custom-toast">{notification}</div>}
-      {user?.role === "admin" && (
-        <div className="profile-card">
-          <h2 className="profile-card-title">Поддержка</h2>
-          {selectedChatUser ? (
-            <>
-              <button className="btn-outline-red mb-3" onClick={() => setSelectedChatUser(null)}>
-                ← Назад к списку
-              </button>
-              <Chat recipientId={selectedChatUser} adminMode />
-            </>
-          ) : (
-            <div className="admin-chat-list">
-              {adminChatUsers.length === 0 && <p>Нет обращений</p>}
-              {adminChatUsers.map((uid) => (
-                <div
-                  key={uid}
-                  className="admin-chat-user"
-                  onClick={() => setSelectedChatUser(uid)}
-                  style={{ cursor: "pointer", padding: "8px", borderBottom: "1px solid #eee" }}
-                >
-                  {uid}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
       <div className="profile-header">
         <div className="profile-header-content">
           <h1 className="profile-header-title">
@@ -256,114 +229,147 @@ function Profile() {
             </div>
           </div>
           <div className="col-lg p-0">
-            <div className="profile-card">
-              <div className="d-flex justify-content-between align-items-center mb-4">
-                <h2 className="profile-card-title mb-0">Предстоящие занятия</h2>
-                <button
-                  className="butt-red d-flex align-items-center gap-2"
-                  onClick={() => navigate("/classes")}
-                >
-                  Записаться
-                </button>
-              </div>
-
-              {upcomingBookings.length === 0 ? (
-                <div className="text-center py-5">
-                  <span style={{ fontSize: "48px" }}>📅</span>
-                  <p className="text-secondary mb-3">У вас нет предстоящих занятий</p>
-                  <button className="btn-outline-red" onClick={() => navigate("/classes")}>
-                    Посмотреть расписание
-                  </button>
-                </div>
-              ) : (
-                upcomingBookings.map((booking) => (
-                  <div
-                    key={booking.id}
-                    className="booking-item upcoming"
-                    onClick={() => navigate(`/classes/${booking.classId}`)}
-                  >
-                    <div className="booking-date-box">
-                      <span className="booking-month">
-                        {new Date(booking.date).toLocaleDateString("ru-RU", {
-                          month: "short",
-                        })}
-                      </span>
-                      <span className="booking-day">
-                        {new Date(booking.date).getDate()}
-                      </span>
-                    </div>
-                    <div className="booking-details">
-                      <h3 className="booking-class-name">{booking.className}</h3>
-                      <div className="d-flex gap-3 text-secondary small">
-                        <span className="d-flex align-items-center gap-1">
-                          <span className="icon-emoji">🕐</span> {booking.time}
-                        </span>
-                        <span className="d-flex align-items-center gap-1">
-                          <span className="icon-emoji">👤</span> {booking.instructor}
-                        </span>
+            {user?.role === "admin" ? (
+              <div className="profile-card">
+                <h2 className="profile-card-title">Обращения в поддержку</h2>
+                {selectedChatUser ? (
+                  <>
+                    <button className="btn-outline-red mb-3" onClick={() => setSelectedChatUser(null)}>
+                      ← Назад к списку
+                    </button>
+                    <Chat
+                      recipientId={selectedChatUser}
+                      adminMode
+                    />
+                  </>
+                ) : (
+                  <div className="admin-chat-list">
+                    {adminChatUsers.length === 0 && <p>Нет обращений</p>}
+                    {adminChatUsers.map((uid) => (
+                      <div
+                        key={uid}
+                        className="admin-chat-user"
+                        onClick={() => setSelectedChatUser(uid)}
+                        style={{ cursor: "pointer", padding: "8px", borderBottom: "1px solid #eee" }}
+                      >
+                        {uid}
                       </div>
-                    </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <div className="profile-card">
+                  <div className="d-flex justify-content-between align-items-center mb-4">
+                    <h2 className="profile-card-title mb-0">Предстоящие занятия</h2>
                     <button
-                      className="booking-cancel-btn"
-                      onClick={(e) => handleCancelBooking(booking.id, booking.className, e)}
+                      className="butt-red d-flex align-items-center gap-2"
+                      onClick={() => navigate("/classes")}
                     >
-                      <span className="icon-emoji">✖</span>
-                      Отменить
+                      Записаться
                     </button>
                   </div>
-                ))
-              )}
-            </div>
 
-            {pastBookings.length > 0 && (
-              <div className="profile-card">
-                <h2 className="profile-card-title mb-4">История занятий</h2>
-                {pastBookings.slice(0, 5).map((booking) => (
-                  <div key={booking.id} className="booking-item past">
-                    <div className="booking-date-box past-date-box">
-                      <span className="booking-month">
-                        {new Date(booking.date).toLocaleDateString("ru-RU", {
-                          month: "short",
-                        })}
-                      </span>
-                      <span className="booking-day">
-                        {new Date(booking.date).getDate()}
-                      </span>
+                  {upcomingBookings.length === 0 ? (
+                    <div className="text-center py-5">
+                      <span style={{ fontSize: "48px" }}>📅</span>
+                      <p className="text-secondary mb-3">У вас нет предстоящих занятий</p>
+                      <button className="btn-outline-red" onClick={() => navigate("/classes")}>
+                        Посмотреть расписание
+                      </button>
                     </div>
-                    <div className="booking-details">
-                      <h3 className="booking-class-name">{booking.className}</h3>
-                      <div className="d-flex gap-3 text-secondary small">
-                        <span className="d-flex align-items-center gap-1">
-                          <span className="icon-emoji">🕐</span> {booking.time}
-                        </span>
-                        <span className="d-flex align-items-center gap-1">
-                          <span className="icon-emoji">👤</span> {booking.instructor}
-                        </span>
+                  ) : (
+                    upcomingBookings.map((booking) => (
+                      <div
+                        key={booking.id}
+                        className="booking-item upcoming"
+                        onClick={() => navigate(`/classes/${booking.classId}`)}
+                      >
+                        <div className="booking-date-box">
+                          <span className="booking-month">
+                            {new Date(booking.date).toLocaleDateString("ru-RU", {
+                              month: "short",
+                            })}
+                          </span>
+                          <span className="booking-day">
+                            {new Date(booking.date).getDate()}
+                          </span>
+                        </div>
+                        <div className="booking-details">
+                          <h3 className="booking-class-name">{booking.className}</h3>
+                          <div className="d-flex gap-3 text-secondary small">
+                            <span className="d-flex align-items-center gap-1">
+                              <span className="icon-emoji">🕐</span> {booking.time}
+                            </span>
+                            <span className="d-flex align-items-center gap-1">
+                              <span className="icon-emoji">👤</span> {booking.instructor}
+                            </span>
+                          </div>
+                        </div>
+                        <button
+                          className="booking-cancel-btn"
+                          onClick={(e) => handleCancelBooking(booking.id, booking.className, e)}
+                        >
+                          <span className="icon-emoji">✖</span>
+                          Отменить
+                        </button>
                       </div>
-                    </div>
-                    <span className="badge badge-completed">Завершено</span>
-                  </div>
-                ))}
-              </div>
-            )}
+                    ))
+                  )}
+                </div>
 
-            <div className="profile-card">
-              <h2 className="profile-card-title mb-4">Статистика</h2>
-              <div className="stats-grid">
-                <div className="stat-item">
-                  <span className="stat-number">{bookingsArray.length}</span>
-                  <span className="stat-label">Всего записей</span>
+                {pastBookings.length > 0 && (
+                  <div className="profile-card">
+                    <h2 className="profile-card-title mb-4">История занятий</h2>
+                    {pastBookings.slice(0, 5).map((booking) => (
+                      <div key={booking.id} className="booking-item past">
+                        <div className="booking-date-box past-date-box">
+                          <span className="booking-month">
+                            {new Date(booking.date).toLocaleDateString("ru-RU", {
+                              month: "short",
+                            })}
+                          </span>
+                          <span className="booking-day">
+                            {new Date(booking.date).getDate()}
+                          </span>
+                        </div>
+                        <div className="booking-details">
+                          <h3 className="booking-class-name">{booking.className}</h3>
+                          <div className="d-flex gap-3 text-secondary small">
+                            <span className="d-flex align-items-center gap-1">
+                              <span className="icon-emoji">🕐</span> {booking.time}
+                            </span>
+                            <span className="d-flex align-items-center gap-1">
+                              <span className="icon-emoji">👤</span> {booking.instructor}
+                            </span>
+                          </div>
+                        </div>
+                        <span className="badge badge-completed">Завершено</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div className="profile-card">
+                  <h2 className="profile-card-title mb-4">Статистика</h2>
+                  <div className="stats-grid">
+                    <div className="stat-item">
+                      <span className="stat-number">{bookingsArray.length}</span>
+                      <span className="stat-label">Всего записей</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-number">{daysWithUs}</span>
+                      <span className="stat-label">Дней с нами</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-number">{bookingsArray.length * 60}</span>
+                      <span className="stat-label">Минут тренировок</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="stat-item">
-                  <span className="stat-number">{daysWithUs}</span>
-                  <span className="stat-label">Дней с нами</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">{bookingsArray.length * 60}</span>
-                  <span className="stat-label">Минут тренировок</span>
-                </div>
-              </div>
-            </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -371,4 +377,4 @@ function Profile() {
   );
 }
 
-export default Profile
+export default Profile;

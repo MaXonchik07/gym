@@ -262,8 +262,3 @@
 .btn-outline-red:hover {
   background: #fef2f2;
 }
-
-/* Для flex-fill в модалках (уже есть в Bootstrap, но если нет - добавь) */
-/* .flex-fill {
-  flex: 1;
-} */
