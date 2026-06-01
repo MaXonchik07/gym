@@ -62,7 +62,7 @@ function Contact() {
                 </div>
             </div>
             <div className="block3cs mx-0">
-                <div className="row gap-5 px-0 gx-0">
+                <div className="row gap-5 px-0 gx-0 block3MapMedia">
                     <div className="col">
                         <form className="formCS">
                             <div className="questionsCS">Есть вопросы?</div>
@@ -82,7 +82,7 @@ function Contact() {
                         </form>
                     </div>
                     <div className="col row gx-0">
-                        <div className="mb-5"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.0641328100855!2d45.97882389444005!3d51.530383532241444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4114c7000890260d%3A0xb69430fed1b7968c!2z0KHQsNGA0LDRgtC-0LLRgdC60LjQuSDQs9C-0YHRg9C00LDRgNGB0YLQstC10L3QvdGL0Lkg0YLQtdGF0L3QuNGH0LXRgdC60LjQuSDRg9C90LjQstC10YDRgdC40YLQtdGCINC40LzQtdC90Lgg0JPQsNCz0LDRgNC40L3QsCDQri4g0JAu!5e0!3m2!1sru!2sru!4v1778598762125!5m2!1sru!2sru"  loading="lazy" className="mapCS" title="googleMap"></iframe></div>
+                        <div className="mb-5 mapMedia"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.0641328100855!2d45.97882389444005!3d51.530383532241444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4114c7000890260d%3A0xb69430fed1b7968c!2z0KHQsNGA0LDRgtC-0LLRgdC60LjQuSDQs9C-0YHRg9C00LDRgNGB0YLQstC10L3QvdGL0Lkg0YLQtdGF0L3QuNGH0LXRgdC60LjQuSDRg9C90LjQstC10YDRgdC40YLQtdGCINC40LzQtdC90Lgg0JPQsNCz0LDRgNC40L3QsCDQri4g0JAu!5e0!3m2!1sru!2sru!4v1778598762125!5m2!1sru!2sru"  loading="lazy" className="mapCS" title="googleMap"></iframe></div>
                         <div className="oftenQuestions">
                             <div className="queBlocksZagolov pb-1">Часто задаваемые вопросы</div>
                             <div className="queBlock">

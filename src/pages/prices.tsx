@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
-import AuthDialog from "./auth"; // убедись, что путь правильный
+import AuthDialog from "./auth";
 
 function Prices() {
     const { user, updateMembership } = useAuth();
@@ -23,9 +23,9 @@ function Prices() {
     };
 
     const plans = [
-        { name: "Базовый", price: "1799₽", type: "Basic" },
-        { name: "Премиум", price: "3699₽", type: "Premium" },
-        { name: "Элитный", price: "6999₽", type: "Elite" },
+        { name: "Базовый", price: "1799₽", type: "Базовый" },
+        { name: "Премиум", price: "3699₽", type: "Премиум" },
+        { name: "Элитный", price: "6999₽", type: "Элитный" },
     ];
 
     const handleGetStarted = (plan: { name: string; price: string; type: string }) => {
@@ -53,10 +53,25 @@ function Prices() {
         }
     };
 
+    const getMembershipBadgeClasss = (type: string) => {
+        switch (type) {
+            case "Базовый": return "badge badge-basic";
+            case "Премиум": return "badge badge-premium";
+            case "Элитный": return "badge badge-elite";
+        }
+    };
+
+    const getMembershipPrice = (type: string) => {
+        switch (type) {
+            case "Базовый": return 0;
+            case "Премиум": return 1;
+            case "Элитный": return 2;
+        }
+    };
+
     return (
         <>
-            {notification && <div className="custom-toast">{notification}</div>}
-
+            {notification && <div className="notificationn">{notification}</div>}
             <div className="block1p mx-0">
                 <div className="block1pCT">
                     <div className="block1pBT">Варианты абонементов</div>
@@ -133,14 +148,17 @@ function Prices() {
                         {user && (
                             <div className="confirm-details">
                                 <div className="confirm-row">
-                                    <span>Текущий:</span>
-                                    <span className="badge badge-basic">{user.membershipType}</span>
+                                    <div>Текущий:</div>
+                                    <div className={getMembershipBadgeClasss(user.membershipType)}>
+                                        {user.membershipType}
+                                    </div>
+                                    <div className="confirm-price">{plans[getMembershipPrice(user.membershipType) ?? 0].price}</div>
                                 </div>
                                 <div className="confirm-arrow">→</div>
                                 <div className="confirm-row new-plan">
-                                    <span>Новый:</span>
-                                    <span className="badge badge-premium">{selectedPlan?.name}</span>
-                                    <span className="confirm-price">{selectedPlan?.price}</span>
+                                    <div>Новый:</div>
+                                    <div id="priceTextA" className={getMembershipBadgeClasss(selectedPlan?.name ?? "null")}>{selectedPlan?.name}</div>
+                                    <div className="confirm-price">{selectedPlan?.price}</div>
                                 </div>
                             </div>
                         )}
@@ -148,8 +166,8 @@ function Prices() {
                             Изменения вступят в силу сразу. Следующее списание через месяц.
                         </div>
                         <div className="d-flex gap-2 mt-3">
-                            <button className="btn-outline-red flex-fill" onClick={() => setConfirmOpen(false)}>Отмена</button>
-                            <button className="btn-red flex-fill" onClick={handleConfirm}>Подтвердить</button>
+                            <button className="buttRed flex-fill" onClick={() => setConfirmOpen(false)}>Отмена</button>
+                            <button className="buttRed flex-fill" onClick={handleConfirm}>Подтвердить</button>
                         </div>
                     </div>
                 </div>
@@ -162,12 +180,12 @@ function Prices() {
                         <h2 className="modal-title">Поздравляем!</h2>
                         <p className="modal-subtitle">Абонемент успешно изменён</p>
                         <div className="success-plan">
-                            <span className="badge badge-premium">{selectedPlan?.name}</span>
+                            <div className={getMembershipBadgeClasss(selectedPlan?.name ?? "null")}>{selectedPlan?.name}</div>
                             <div className="success-price">{selectedPlan?.price}</div>
                         </div>
                         <div className="d-flex gap-2 mt-4">
-                            <button className="btn-outline-red flex-fill" onClick={() => setSuccessOpen(false)}>Закрыть</button>
-                            <button className="btn-red flex-fill" onClick={() => { setSuccessOpen(false); navigate("/profile"); }}>В профиль</button>
+                            <button className="buttRed flex-fill" onClick={() => setSuccessOpen(false)}>Закрыть</button>
+                            <button className="buttRed flex-fill" onClick={() => { setSuccessOpen(false); navigate("/profile"); }}>В профиль</button>
                         </div>
                     </div>
                 </div>

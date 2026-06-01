@@ -1,48 +1,40 @@
-/* Основной контейнер (аналог паддингов block2cs/block3cs) */
-.profile-container {
+.block2prf{
   padding-inline: 200px;
   padding-top: 3%;
   padding-bottom: 3%;
 }
-
-/* Красный header (как block1cs) */
-.profile-header {
-  background: red;
-  padding-inline: 200px;
-  padding-top: 3%;
-  padding-bottom: 3.5%;
-  color: white;
+.block1prf{
+    padding-inline: 200px;
+    background-color: red;
+    width: 100%;
+    padding-top: 3%;
+    padding-bottom: 3.5%;
 }
-.profile-header-content {
-  width: 100%;
+.block1prfCT{
+    width: 100%;
+    color: white;
 }
-.profile-header-title {
-  font-size: xx-large;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
+.block1prfBT{
+    font-size:xx-large;
+    font-weight: 800;
 }
-.profile-header-subtitle {
-  font-weight: 400;
-  font-size: large;
-  color: rgba(255, 255, 255, 0.85);
+.block1prfT{
+    font-weight: 400;
+    font-size: large;
 }
-
-/* Карточка (единый стиль) */
-.profile-card {
+.profile{
   background: white;
   border-radius: 24px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.11);
   padding: 3%;
   margin-bottom: 1.5rem;
 }
-.profile-card-title {
+.profileAbout{
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 1.5rem;
 }
-
-/* Аватар */
-.avatar-circle {
+.avatar{
   width: 64px;
   height: 64px;
   background-color: #fee2e2;
@@ -54,84 +46,105 @@
   font-weight: bold;
   color: red;
 }
-
-/* Информационные строки */
-.info-list {
-  border-top: 1px solid #e5e7eb;
-  padding-top: 1rem;
-  margin-top: 1rem;
+.profileName{
+  font-weight: 600;
+  font-size: 16px;
 }
-.info-item {
+.profileInfo{
+  border-top: 1px solid #e5e7eb;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+.profileInfoBlock{
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
+  gap: 2%;
   font-size: 14px;
   color: #374151;
 }
-.info-item .icon {
-  color: #6b7280;
-}
-
-/* Иконки (эмодзи) */
-.icon-emoji {
+.profileInfoIcon1{
   font-size: 18px;
   width: 18px;
-  display: inline-flex;
+  height: 18px;
   align-items: center;
   justify-content: center;
   color: #6b7280;
+  background-image: url(/images/MailRed.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
-
-.butt-red {
+.profileInfoIcon2{
+ background-image: url(/images/PhoneRed.png);
+}
+.bookingDetailIcon1{
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  background-image: url(/images/HoursRed.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.bookingDetailIcon2{
+ background-image: url(/images/trainers.png);
+}
+.butt-red{
   background-color: red;
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 0.75rem 1.5rem;
+  padding-inline: 16px;
+  padding-top: 5%;
+  padding-bottom: 5%;
   font-size: 16px;
   font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
-.butt-red:hover {
-  background-color: red;
-}
-.butt-red:hover {
+.butt-red:hover{
   background: #d40000;
 }
-
-/* Бейджи */
-.badge {
-  display: inline-block;
-  padding: 0.25em 0.75em;
-  font-size: 0.75rem;
+.badge{
+  padding-inline: 5%;
+  font-size: 14px;
   font-weight: 600;
   border-radius: 12px;
-  line-height: 1.4;
 }
-.badge-basic {
-  background-color: #f3f4f6;
-  color: #1f2937;
+.badge-basic{
+  background-color: rgba(206, 141, 76, 0.25);
+  color: #CD7F32;
 }
-.badge-premium {
-  background-color: #dbeafe;
-  color: #1e40af;
+.badge-premium{
+  background-color: rgba(219, 234, 254, 0.5);
+  color: #C0C0C0;
 }
-.badge-elite {
-  background-color: #f3e8ff;
-  color: #6b21a8;
+.badge-elite{
+  background-color: rgba(255, 217, 0, 0.25);
+  color: rgb(223, 193, 24);
 }
-.badge-completed {
+.badge-completed{
   background-color: white;
   color: #16a34a;
   border: 1px solid #16a34a;
-  font-size: 0.7rem;
-  padding: 0.2em 0.6em;
+  font-size: 14px;
+  padding-inline: 1%;
 }
-
-.booking-item {
+.bookingIcon{
+  width: 48px;
+  height: 48px;
+  background-image: url(/images/ScheduleRed.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; 
+}
+.bookingEmpty{
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+}
+.booking{
   display: flex;
   align-items: flex-start;
   gap: 1rem;
@@ -141,21 +154,13 @@
   margin-bottom: 0.75rem;
   background-color: white;
   cursor: pointer;
-  transition: box-shadow 0.2s;
-}
-.booking-item:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-.booking-item.upcoming {
   border-left: 4px solid red;
   background-color: #fef2f2;
 }
-.booking-item.past {
+.bookingAfter{
   background-color: #f9fafb;
 }
-
-/* Блок с датой */
-.booking-date-box {
+.bookingDate{
   width: 3.5rem;
   height: 3.5rem;
   background-color: red;
@@ -167,33 +172,28 @@
   justify-content: center;
   flex-shrink: 0;
 }
-.past-date-box {
+.bookingDatePast{
   background-color: #d1d5db;
   color: #4b5563;
 }
-.booking-month {
-  font-size: 0.65rem;
+.bookingMonth{
+  font-size: 10px;
   font-weight: 500;
   text-transform: uppercase;
 }
-.booking-day {
-  font-size: 1.25rem;
-  font-weight: bold;
+.bookingDay{
+  font-size: 20px;
+  font-weight: 600;
   line-height: 1;
 }
-
-.booking-details {
+.bookingDetails{
   flex: 1;
-  min-width: 0;
 }
-.booking-class-name {
-  font-weight: bold;
-  font-size: 1rem;
-  margin-bottom: 0.25rem;
+.bookingName{
+  font-weight: 600;
+  font-size: 16px;
 }
-
-/* Кнопка отмены */
-.booking-cancel-btn {
+.bookingCancel {
   background: transparent;
   border: none;
   color: red;
@@ -204,44 +204,52 @@
   padding: 0.25rem 0.5rem;
   border-radius: 8px;
 }
-.booking-cancel-btn:hover {
+.bookingCancel:hover{
   background: #fee2e2;
 }
-
-/* Статистика */
-.stats-grid {
+.profileStat{
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.11);
+  padding: 3%;
+  margin-bottom: 5%;
+}
+.profileStatTitle{
+  font-size: 20px;
+  font-weight: 500;
+}
+.statsBlock{
   display: flex;
   justify-content: space-around;
   text-align: center;
 }
-.stat-item {
+.stat{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.stat-number {
+.statNum{
   font-size: 2rem;
   font-weight: bold;
   color: red;
 }
-.stat-label {
+.statText{
   font-size: 0.875rem;
   color: #4b5563;
 }
-
-.custom-toast {
+.notificationn{
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  left: 20px;
   background: #333;
   color: #fff;
   padding: 12px 24px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 9999;
-  animation: fadeInOut 3s ease forwards;
+  z-index: 10;
+  animation: notifyInOut 3s ease forwards;
 }
-@keyframes fadeInOut {
+@keyframes notifyInOut {
   0% {
     opacity: 0;
     transform: translateY(20px);
@@ -259,71 +267,138 @@
     transform: translateY(20px);
   }
 }
-
-/* Адаптивность */
-@media (max-width: 992px) {
-  .profile-container,
-  .profile-header {
-    padding-inline: 20px;
-  }
+.buttRed{
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.5%;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
 }
-/* Форма редактирования профиля */
-.edit-form {
+.buttRed:hover {
+  background: #ce0000;
+}
+.changePlan{
+  width: 100%;
+}
+.profileChangeBlock{
   margin-top: 1rem;
 }
-
-.edit-error {
+.profileChangeError{
   background-color: #fee2e2;
   color: #df1212;
-  padding: 0.5rem;
+  padding: 1%;
   border-radius: 8px;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+  margin-bottom: 1%;
+  font-size: 14px;
 }
-
-.form-group {
-  margin-bottom: 0.8rem;
+.profileChange{
+  margin-bottom: 2.5%;
 }
-
-.form-label {
+.profileChangeName{
   display: block;
   font-weight: 500;
-  margin-bottom: 0.2rem;
-  font-size: 0.9rem;
+  margin-bottom: 1%;
+  font-size: 14px;
   color: #374151;
 }
-
-.form-input {
+.profileChangeInput{
   width: 100%;
-  padding: 0.5rem;
+  padding: 1%;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   background: #f9fafb;
-  font-size: 0.95rem;
-  outline: none;
-  transition: border 0.2s;
+  font-size: 14px;
 }
-
-.form-input:focus {
+.profileChangeInput:focus{
   border-color: red;
   background: white;
 }
-
-/* Кнопки внутри формы */
-.flex-fill {
-  flex: 1;
-}
-
-.admin-chat-list {
+.adminChatList{
   max-height: 300px;
   overflow-y: auto;
 }
-
-.chat-window {
+.adminChatUser{
+  cursor: pointer;
+  padding: 8px;
+  border: 1px solid #df1212;
+  margin-top: 1%;
+  border-radius: 12px;
+}
+.chat-window{
   position: relative; 
   width: 100%;
   height: 400px;
   margin-top: 0;
   box-shadow: none;
   border: 1px solid #e5e7eb;
+}
+
+@media (max-width: 430px) {
+  .block1prf {
+    padding-inline: 15px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+  }
+  .block1prfBT {
+    font-size: 24px;
+  }
+  .block1prfT {
+    font-size: 14px;
+  }
+  .block2prf {
+    padding-inline: 15px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+  }
+  .block2prfMediaAbout{
+    gap: 0px !important;
+  }
+  .block2prf .row {
+    flex-direction: column;
+  }
+  .block2prf .col-4,
+  .block2prf .col {
+    width: 100% !important;
+  }
+  .profile {
+    padding: 5%;
+  }
+  .avatar {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+  .profileName {
+    font-size: 14px;
+  }
+  .statsBlock {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .statNum {
+    font-size: 1.5rem;
+  }
+  .booking {
+    flex-wrap: wrap;
+  }
+  .bookingDate {
+    margin-bottom: 10px;
+  }
+  .chat-window {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
+  }
+  .chat-bubble {
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
+  }
 }

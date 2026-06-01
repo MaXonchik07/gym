@@ -44,7 +44,7 @@ function Classes() {
                             <div className="scheduleBlockC">Пятница 19:00</div>
                         </div>
                         <div className="moreButtonW">
-                            <Link to="/yoga"><button className="moreButton">Подробнее</button></Link>
+                            <Link to="/classes/yoga"><button className="moreButton">Подробнее</button></Link>
                         </div>
                     </div>
                     <div className="col px-0 tableC">
@@ -76,7 +76,7 @@ function Classes() {
                             <div className="scheduleBlockC">Пятница 7:00</div>
                         </div>
                         <div className="moreButtonW">
-                            <Link to="/"><button className="moreButton">Подробнее</button></Link>
+                            <Link to="/classes/strength"><button className="moreButton">Подробнее</button></Link>
                         </div>
                     </div>
                     <div className="col px-0 tableC">
@@ -108,7 +108,7 @@ function Classes() {
                             <div className="scheduleBlockC">Пятница 18:30</div>
                         </div>
                         <div className="moreButtonW">
-                            <Link to="/"><button className="moreButton">Подробнее</button></Link>
+                            <Link to="/classes/cardio"><button className="moreButton">Подробнее</button></Link>
                         </div>
                     </div>
                 </div>
@@ -142,7 +142,7 @@ function Classes() {
                             <div className="scheduleBlockC">Пятница 17:00</div>
                         </div>
                         <div className="moreButtonW">
-                            <Link to="/"><button className="moreButton">Подробнее</button></Link>
+                            <Link to="/classes/box"><button className="moreButton">Подробнее</button></Link>
                         </div>
                     </div>
                     <div className="col px-0 tableC">
@@ -174,7 +174,7 @@ function Classes() {
                             <div className="scheduleBlockC">Суббота 18:00</div>
                         </div>
                         <div className="moreButtonW">
-                            <Link to="/"><button className="moreButton">Подробнее</button></Link>
+                            <Link to="/classes/hiit"><button className="moreButton">Подробнее</button></Link>
                         </div>
                     </div>
                     <div className="col px-0 tableC">
@@ -206,7 +206,7 @@ function Classes() {
                             <div className="scheduleBlockC">Пятница 15:00</div>
                         </div>
                         <div className="moreButtonW">
-                            <Link to="/"><button className="moreButton">Подробнее</button></Link>
+                            <Link to="/classes/cycling"><button className="moreButton">Подробнее</button></Link>
                         </div>
                     </div>
                 </div>
@@ -240,7 +240,7 @@ function Classes() {
                             <div className="scheduleBlockC">Суббота 18:00</div>
                         </div>
                         <div className="moreButtonW">
-                            <Link to="/"><button className="moreButton">Подробнее</button></Link>
+                            <Link to="/classes/acroYoga"><button className="moreButton">Подробнее</button></Link>
                         </div>
                     </div>
                     <div className="col px-0 tableC">
@@ -272,10 +272,10 @@ function Classes() {
                             <div className="scheduleBlockC">Пятница 19:30</div>
                         </div>
                         <div className="moreButtonW">
-                            <Link to="/"><button className="moreButton">Подробнее</button></Link>
+                            <Link to="/classes/fullbody"><button className="moreButton">Подробнее</button></Link>
                         </div>
                     </div>
-                    <div className="col px-0 tableC">
+                    <div className="col px-0 tableC tableCMediaLast">
                         <div className="tableImageC9"></div>
                         <div className="tableTextCW">
                             <div className="tableTextC">
@@ -304,7 +304,7 @@ function Classes() {
                             <div className="scheduleBlockC">Суббота 18:00</div>
                         </div>
                         <div className="moreButtonW">
-                            <Link to="/"><button className="moreButton">Подробнее</button></Link>
+                            <Link to="/classes/bodyweight"><button className="moreButton">Подробнее</button></Link>
                         </div>
                     </div>
                 </div>

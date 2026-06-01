@@ -1,153 +1,187 @@
-.block1p{
-    padding-inline: 200px;
-    background-color: red;
-    width: 100%;
-    padding-top: 3%;
-    padding-bottom: 3.5%;
+.block1p {
+  padding-inline: 200px;
+  background-color: red;
+  width: 100%;
+  padding-top: 3%;
+  padding-bottom: 3.5%;
 }
-.block1pCT{
-    width: 100%;
-    color: white;
-    text-align: center;
+
+.block1pCT {
+  width: 100%;
+  color: white;
+  text-align: center;
 }
-.block1pBT{
-    font-size:xx-large;
-    font-weight: 800;
+
+.block1pBT {
+  font-size: xx-large;
+  font-weight: 800;
 }
-.block1pT{
-    font-weight: 400;
-    font-size: large;
+
+.block1pT {
+  font-weight: 400;
+  font-size: large;
 }
-.block2p{
-    padding-inline: 200px;
-    padding-top: 3%;
-    padding-bottom: 3%;
+
+.block2p {
+  padding-inline: 200px;
+  padding-top: 3%;
+  padding-bottom: 3%;
 }
-.priceTable{
-    text-align: center;
-    border-radius: 11px;
-    padding: 2%;
-    height: 800px;
-    flex-direction: column;
+
+.priceTable {
+  text-align: center;
+  border-radius: 11px;
+  padding: 2%;
+  height: 800px;
+  flex-direction: column;
 }
-.priceTable1{
-    border: 2px solid #CD7F32;
+
+.priceTable1 {
+  border: 2px solid #CD7F32;
 }
-.priceTable2{
-    border: 2px solid #C0C0C0;
+
+.priceTable2 {
+  border: 2px solid #C0C0C0;
 }
-.priceTable3{
-    border: 2px solid #FFD700;
+
+.priceTable3 {
+  border: 2px solid #FFD700;
 }
-.price{
-    justify-content: center;
-    padding-bottom: 5%;
+
+.price {
+  justify-content: center;
+  padding-bottom: 5%;
 }
-.priceText{
-    text-align: start;
-    padding-inline: 5%;
+
+.priceText {
+  text-align: start;
+  padding-inline: 5%;
 }
-.priceDesc{
-    font-size: 18px;
-    font-weight: 400;
-    opacity: 80%;
-    padding-bottom: 5%;
+
+.priceDesc {
+  font-size: 18px;
+  font-weight: 400;
+  opacity: 80%;
+  padding-bottom: 5%;
 }
-.priceZagolov{
-    font-size: 28px;
-    font-weight: 600;
-    padding-bottom: 5%;
+
+.priceZagolov {
+  font-size: 28px;
+  font-weight: 600;
+  padding-bottom: 5%;
 }
-.markp{
-    background-image: url(/images/checkMark.png);
-    width: 19px;
-    height: 19px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+
+.markp {
+  background-image: url(/images/checkMark.png);
+  width: 19px;
+  height: 19px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
-.priceNum{
-    font-size: 40px;
-    font-weight: 600;
+
+.priceNum {
+  font-size: 40px;
+  font-weight: 600;
 }
-.priceMonth{
-    font-size: 20px;
-    justify-items: center;
-    color: black;
-    opacity: 60%;
+
+.priceMonth {
+  font-size: 20px;
+  justify-items: center;
+  color: black;
+  opacity: 60%;
 }
-.priceButtonW{
-    text-align: center;
-    margin-top: auto;
-    padding-bottom: 1%;
+
+.priceButtonW {
+  text-align: center;
+  margin-top: auto;
+  padding-bottom: 1%;
 }
-.priceButton{
-    width: 100%;
-    border-radius: 11px;
-    border-width: 0px;
-    color: white;
-    height: 30px;
-    font-weight: 400;
+
+.priceButton {
+  width: 100%;
+  border-radius: 11px;
+  border-width: 0px;
+  color: white;
+  height: 30px;
+  font-weight: 400;
 }
-.priceButton1{
-    background-color: #CD7F32;
-    border-color: #CD7F32;
+
+.priceButton1 {
+  background-color: #CD7F32;
+  border-color: #CD7F32;
 }
-.priceButton2{
-    background-color: #C0C0C0;
-    border-color: #C0C0C0;
+
+.priceButton2 {
+  background-color: #C0C0C0;
+  border-color: #C0C0C0;
 }
-.priceButton3{
-    background-color: #FFD700;
-    border-color: #FFD700;
+
+.priceButton3 {
+  background-color: #FFD700;
+  border-color: #FFD700;
 }
-.list{
-    align-items: center;
+
+.list {
+  align-items: center;
 }
-/* ---------- КАСТОМНЫЙ TOAST ---------- */
-.custom-toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #333;
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 9999;
-  animation: fadeInOut 3s ease forwards;
-}
+
 @keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(20px); }
-  10% { opacity: 1; transform: translateY(0); }
-  90% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(20px); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 }
 
 /* ---------- МОДАЛЬНЫЕ ОКНА (общие) ---------- */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
 }
+
 .modal-content {
   background: white;
   border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   padding: 2rem;
   max-width: 450px;
   width: 100%;
   position: relative;
   animation: modalFadeIn 0.2s ease;
 }
+
 @keyframes modalFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
 .modal-close {
   position: absolute;
   top: 1rem;
@@ -158,28 +192,17 @@
   cursor: pointer;
   color: #6b7280;
 }
+
 .modal-title {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
 }
+
 .modal-subtitle {
   color: #6b7280;
   margin-bottom: 1.5rem;
 }
-
-/* ---------- БЕЙДЖИ ---------- */
-.badge {
-  display: inline-block;
-  padding: 0.25em 0.75em;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 12px;
-  line-height: 1.4;
-}
-.badge-basic { background: #f3f4f6; color: #1f2937; }
-.badge-premium { background: #dbeafe; color: #1e40af; }
-.badge-elite { background: #f3e8ff; color: #6b21a8; }
 
 /* ---------- ПОДТВЕРЖДЕНИЕ ---------- */
 .confirm-details {
@@ -188,27 +211,40 @@
   padding: 1rem;
   margin-bottom: 1rem;
 }
+
 .confirm-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
 }
+
+#priceTextA {
+  margin-left: 15px;
+}
+
 .confirm-row.new-plan {
   background: #fef2f2;
   border: 1px solid #fecaca;
   border-radius: 8px;
-  padding: 0.7rem;
+  padding: 3%;
 }
+
 .confirm-arrow {
   text-align: center;
   color: #6b7280;
   margin: 0.3rem 0;
 }
+
 .confirm-price {
   font-weight: bold;
   color: #dc2626;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
 }
+
 .confirm-info {
   background: #eff6ff;
   border-radius: 8px;
@@ -222,6 +258,7 @@
   font-size: 3rem;
   margin-bottom: 1rem;
 }
+
 .success-plan {
   background: #f0fdf4;
   border: 1px solid #bbf7d0;
@@ -229,36 +266,53 @@
   padding: 1rem;
   margin-top: 1rem;
 }
+
 .success-price {
   font-size: 1.5rem;
   font-weight: bold;
   color: #16a34a;
 }
 
-/* ---------- КНОПКИ В МОДАЛКАХ ---------- */
-.btn-red {
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  align-items: center;
-  justify-content: center;
-}
-.btn-red:hover {
-  background-color: #b91c1c;
-}
-.btn-outline-red {
-  background: white;
-  color: #dc2626;
-  border: 1px solid #dc2626;
-  border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-}
-.btn-outline-red:hover {
-  background: #fef2f2;
+@media (max-width: 430px) {
+  .block1p {
+    padding-inline: 15px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+  }
+  .block1pBT {
+    font-size: 24px;
+  }
+  .block1pT {
+    font-size: 14px;
+  }
+  .block2p {
+    padding-inline: 15px;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    gap: 45px !important;
+  }
+  .block2p .row {
+    flex-direction: column;
+  }
+  .priceTable {
+    width: 100% !important;
+    height: auto;
+    padding: 4%;
+  }
+  .priceNum {
+    font-size: 32px;
+  }
+  .priceZagolov {
+    font-size: 22px;
+  }
+  .priceDesc {
+    font-size: 14px;
+  }
+  .modal-content {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+  .modal-title {
+    font-size: 1.2rem;
+  }
 }

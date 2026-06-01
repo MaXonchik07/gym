@@ -1,5 +1,5 @@
 import { useAuth } from "../AuthContext";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import Chat from "./chat";
 
@@ -18,6 +18,14 @@ function Profile() {
   const [editError, setEditError] = useState("");
   const [adminChatUsers, setAdminChatUsers] = useState<{ user_id: string; first_name: string; last_name: string }[]>([]);
   const [selectedChatUser, setSelectedChatUser] = useState<{ userId: string; firstName: string; lastName: string } | null>(null);
+
+  const classDurations: Record<string, number> = {
+    yoga: 45,
+    strength: 60,
+    spin: 45,
+    boxing: 60,
+    hiit: 45,
+  };
 
   useEffect(() => {
     if (user?.role === "admin") {
@@ -45,12 +53,16 @@ function Profile() {
 
   const getMembershipBadgeClass = (type: string) => {
     switch (type) {
-      case "Basic": return "badge badge-basic";
-      case "Premium": return "badge badge-premium";
-      case "Elite": return "badge badge-elite";
-      default: return "badge badge-basic";
+      case "Базовый": return "badge badge-basic";
+      case "Премиум": return "badge badge-premium";
+      case "Элитный": return "badge badge-elite";
     }
   };
+
+  const totalMinutes = bookingsArray.reduce((total, booking) => {
+    const duration = classDurations[booking.classId] || 60;
+    return total + duration;
+  }, 0);
 
   const showNotification = (msg: string) => {
     setNotification(msg);
@@ -116,146 +128,112 @@ function Profile() {
     }
   };
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
-    value = value.replace(/[^0-9+]/g, '');
-    if (value.indexOf('+') > 0) {
-      value = value.slice(0, value.indexOf('+')) + value.slice(value.indexOf('+') + 1);
-    }
-    setEditForm({ ...editForm, phone: value });
-  };
-
   return (
     <>
-      {notification && <div className="custom-toast">{notification}</div>}
-      <div className="profile-header">
-        <div className="profile-header-content">
-          <h1 className="profile-header-title">
-            Привет, {isEditing ? "..." : user.firstName ?? "Гость"}!
-          </h1>
-          <p className="profile-header-subtitle">
+      {notification && <div className="notificationn">{notification}</div>}
+      <div className="block1prf mx-0">
+        <div className="block1prfCT">
+          <div className="block1prfBT">
+            Привет, {isEditing ? "..." : user.firstName}!
+          </div>
+          <div className="block1prfT">
             Добро пожаловать в ваш личный кабинет
-          </p>
+          </div>
         </div>
       </div>
-      <div className="profile-container mx-0">
-        <div className="row gap-5 mx-0">
+      <div className="block2prf mx-0">
+        <div className="row gap-5 mx-0 block2prfMediaAbout">
           <div className="col-4 p-0">
-            <div className="profile-card">
-              <div className="profile-card-title">Информация о профиле</div>
+            <div className="profile">
+              <div className="profileAbout">Информация о профиле</div>
               <div className="d-flex align-items-center gap-3 mb-4">
-                <div className="avatar-circle">
-                  <span>
-                    {user.firstName?.[0] ?? ""}
-                    {user.lastName?.[0] ?? ""}
-                  </span>
+                <div className="avatar">
+                  <div>
+                    {user.firstName?.[0]}
+                    {user.lastName?.[0]}
+                  </div>
                 </div>
                 {!isEditing && (
                   <div>
-                    <p className="fw-bold mb-1">
-                      {user.firstName ?? ""} {user.lastName ?? ""}
-                    </p>
-                    <span className={getMembershipBadgeClass(user.membershipType)}>
+                    <div className="profileName mb-1">
+                      {user.firstName} {user.lastName}
+                    </div>
+                    <div className={getMembershipBadgeClass(user.membershipType)}>
                       {user.membershipType}
-                    </span>
+                    </div>
                   </div>
                 )}
               </div>
-
               {isEditing ? (
-                <div className="edit-form">
-                  {editError && <div className="edit-error">{editError}</div>}
-                  <div className="form-group">
-                    <label className="form-label">Имя</label>
-                    <input
-                      className="form-input"
-                      value={editForm.firstName}
-                      onChange={(e) => setEditForm({ ...editForm, firstName: e.target.value })}
-                    />
+                <div className="profileChangeBlock">
+                  {editError && <div className="profileChangeError">{editError}</div>}
+                  <div className="profileChange">
+                    <label className="profileChangeName">Имя</label>
+                    <input className="profileChangeInput" value={editForm.firstName} onChange={(e) => setEditForm({ ...editForm, firstName: e.target.value })} />
                   </div>
-                  <div className="form-group">
-                    <label className="form-label">Фамилия</label>
-                    <input
-                      className="form-input"
-                      value={editForm.lastName}
-                      onChange={(e) => setEditForm({ ...editForm, lastName: e.target.value })}
-                    />
+                  <div className="profileChange">
+                    <label className="profileChangeName">Фамилия</label>
+                    <input className="profileChangeInput" value={editForm.lastName} onChange={(e) => setEditForm({ ...editForm, lastName: e.target.value })} />
                   </div>
-                  <div className="form-group">
-                    <label className="form-label">Почта</label>
-                    <input
-                      className="form-input"
-                      value={editForm.email}
-                      onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
-                    />
+                  <div className="profileChange">
+                    <label className="profileChangeName">Почта</label>
+                    <input className="profileChangeInput" value={editForm.email} onChange={(e) => setEditForm({ ...editForm, email: e.target.value })} />
                   </div>
-                  <div className="form-group">
-                    <label className="form-label">Телефон</label>
-                    <input
-                      className="form-input"
-                      value={editForm.phone}
-                      onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
-                    />
+                  <div className="profileChange">
+                    <label className="profileChangeName">Телефон</label>
+                    <input className="profileChangeInput" value={editForm.phone} onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })} />
                   </div>
                   <div className="d-flex gap-2 mt-3">
-                    <button className="btn-outline-red flex-fill" onClick={() => setIsEditing(false)}>
+                    <button className="buttRed flex-fill" onClick={() => setIsEditing(false)}>
                       Отмена
                     </button>
-                    <button className="btn-red flex-fill" onClick={handleSaveProfile}>
+                    <button className="buttRed flex-fill" onClick={handleSaveProfile}>
                       Сохранить
                     </button>
                   </div>
                 </div>
               ) : (
                 <>
-                  <div className="info-list">
-                    <div className="info-item">
-                      <span className="icon-emoji">✉️</span>
-                      <span>{user.email}</span>
+                  <div className="profileInfo">
+                    <div className="profileInfoBlock mb-2">
+                      <div className="profileInfoIcon1"></div>
+                      <div>{user.email}</div>
                     </div>
-                    <div className="info-item">
-                      <span className="icon-emoji">📞</span>
-                      <span>{user.phone}</span>
+                    <div className="profileInfoBlock">
+                      <div className="profileInfoIcon2 profileInfoIcon1"></div>
+                      <div>{user.phone}</div>
                     </div>
                   </div>
-
-                  <div className="d-grid gap-2 mt-4">
-                    <button className="btn-outline-red" onClick={startEditing}>
+                  <div className="d-grid gap-2">
+                    <button className="buttRed" onClick={startEditing}>
                       Редактировать профиль
                     </button>
-                    <button className="btn-outline-red" onClick={() => navigate("/prices")}>
-                      Изменить план
-                    </button>
+                    <Link to="/prices" className="p-0">
+                      <button className="buttRed changePlan">
+                        Изменить план
+                      </button>
+                    </Link>
                   </div>
                 </>
               )}
             </div>
           </div>
-          <div className="col-lg p-0">
+          <div className="col p-0">
             {user?.role === "admin" ? (
-              <div className="profile-card">
-                <h2 className="profile-card-title">Обращения в поддержку</h2>
+              <div className="profileStat">
+                <h2 className="profileStatTitle">Обращения в поддержку</h2>
                 {selectedChatUser ? (
                   <>
-                    <button className="btn-outline-red mb-3" onClick={() => setSelectedChatUser(null)}>
+                    <button className="buttRed" onClick={() => setSelectedChatUser(null)}>
                       ← Назад к списку
                     </button>
-                    <Chat
-                      recipientId={selectedChatUser.userId}
-                      recipientName={`${selectedChatUser.firstName} ${selectedChatUser.lastName}`}
-                      adminMode
-                    />
+                    <Chat recipientId={selectedChatUser.userId} recipientName={`${selectedChatUser.firstName} ${selectedChatUser.lastName}`} adminMode />
                   </>
                 ) : (
-                  <div className="admin-chat-list">
+                  <div className="adminChatList">
                     {adminChatUsers.length === 0 && <p>Нет обращений</p>}
                     {adminChatUsers.map((u) => (
-                      <div
-                        key={u.user_id}
-                        className="admin-chat-user"
-                        onClick={() => setSelectedChatUser({ userId: u.user_id, firstName: u.first_name, lastName: u.last_name })}
-                        style={{ cursor: "pointer", padding: "8px", borderBottom: "1px solid #eee" }}
-                      >
+                      <div key={u.user_id} className="adminChatUser" onClick={() => setSelectedChatUser({ userId: u.user_id, firstName: u.first_name, lastName: u.last_name })}>
                         {u.first_name} {u.last_name} (ID: {u.user_id})
                       </div>
                     ))}
@@ -264,111 +242,95 @@ function Profile() {
               </div>
             ) : (
               <>
-                <div className="profile-card">
+                <div className="profileStat">
                   <div className="d-flex justify-content-between align-items-center mb-4">
-                    <h2 className="profile-card-title mb-0">Предстоящие занятия</h2>
-                    <button
-                      className="butt-red d-flex align-items-center gap-2"
-                      onClick={() => navigate("/classes")}
-                    >
-                      Записаться
-                    </button>
+                    <div className="profileStatTitle mb-0">Предстоящие занятия</div>
+                    <Link to="/classes">
+                      <button className="butt-red">Записаться</button>
+                    </Link>
                   </div>
-
                   {upcomingBookings.length === 0 ? (
-                    <div className="text-center py-5">
-                      <span style={{ fontSize: "48px" }}>📅</span>
-                      <p className="text-secondary mb-3">У вас нет предстоящих занятий</p>
-                      <button className="btn-outline-red" onClick={() => navigate("/classes")}>
-                        Посмотреть расписание
-                      </button>
+                    <div className="py-5 bookingEmpty">
+                      <div className="bookingIcon"></div>
+                      <div className="text-secondary mb-3">У вас нет предстоящих занятий</div>
                     </div>
                   ) : (
                     upcomingBookings.map((booking) => (
-                      <div
-                        key={booking.id}
-                        className="booking-item upcoming"
-                        onClick={() => navigate(`/classes/${booking.classId}`)}
-                      >
-                        <div className="booking-date-box">
-                          <span className="booking-month">
+                      <div key={booking.id} className="booking bookingBefore">
+                        <div className="bookingDate">
+                          <div className="bookingMonth">
                             {new Date(booking.date).toLocaleDateString("ru-RU", {
                               month: "short",
                             })}
-                          </span>
-                          <span className="booking-day">
+                          </div>
+                          <div className="bookingDay">
                             {new Date(booking.date).getDate()}
-                          </span>
-                        </div>
-                        <div className="booking-details">
-                          <h3 className="booking-class-name">{booking.className}</h3>
-                          <div className="d-flex gap-3 text-secondary small">
-                            <span className="d-flex align-items-center gap-1">
-                              <span className="icon-emoji">🕐</span> {booking.time}
-                            </span>
-                            <span className="d-flex align-items-center gap-1">
-                              <span className="icon-emoji">👤</span> {booking.instructor}
-                            </span>
                           </div>
                         </div>
-                        <button
-                          className="booking-cancel-btn"
-                          onClick={(e) => handleCancelBooking(booking.id, booking.className, e)}
-                        >
-                          <span className="icon-emoji">✖</span>
-                          Отменить
+                        <div className="bookingDetails">
+                          <h3 className="bookingName">{booking.className}</h3>
+                          <div className="d-flex gap-3 text-secondary small">
+                            <div className="d-flex align-items-center gap-1">
+                              <div className="bookingDetailIcon1"></div> {booking.time}
+                            </div>
+                            <div className="d-flex align-items-center gap-1">
+                              <div className="bookingDetailIcon1 bookingDetailIcon2"></div> {booking.instructor}
+                            </div>
+                          </div>
+                        </div>
+                        <button className="bookingCancel" onClick={(e) => handleCancelBooking(booking.id, booking.className, e)}>
+                          <div className="icon-emoji">✖</div>
+                          <div>Отменить</div>
                         </button>
                       </div>
                     ))
                   )}
                 </div>
-
                 {pastBookings.length > 0 && (
-                  <div className="profile-card">
-                    <h2 className="profile-card-title mb-4">История занятий</h2>
+                  <div className="profileStat">
+                    <h2 className="profileStatTitle mb-4">История занятий</h2>
                     {pastBookings.slice(0, 5).map((booking) => (
-                      <div key={booking.id} className="booking-item past">
-                        <div className="booking-date-box past-date-box">
-                          <span className="booking-month">
+                      <div key={booking.id} className="booking bookingAfter">
+                        <div className="bookingDate bookingDatePast">
+                          <div className="bookingMonth">
                             {new Date(booking.date).toLocaleDateString("ru-RU", {
                               month: "short",
                             })}
-                          </span>
-                          <span className="booking-day">
+                          </div>
+                          <div className="bookingDay">
                             {new Date(booking.date).getDate()}
-                          </span>
-                        </div>
-                        <div className="booking-details">
-                          <h3 className="booking-class-name">{booking.className}</h3>
-                          <div className="d-flex gap-3 text-secondary small">
-                            <span className="d-flex align-items-center gap-1">
-                              <span className="icon-emoji">🕐</span> {booking.time}
-                            </span>
-                            <span className="d-flex align-items-center gap-1">
-                              <span className="icon-emoji">👤</span> {booking.instructor}
-                            </span>
                           </div>
                         </div>
-                        <span className="badge badge-completed">Завершено</span>
+                        <div className="bookingDetails">
+                          <h3 className="bookingName">{booking.className}</h3>
+                          <div className="d-flex gap-3 text-secondary small">
+                            <div className="d-flex align-items-center gap-1">
+                              <div className="bookingDetailIcon1"></div> {booking.time}
+                            </div>
+                            <div className="d-flex align-items-center gap-1">
+                              <div className="bookingDetailIcon1 bookingDetailIcon2"></div> {booking.instructor}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="badge badge-completed">Завершено</div>
                       </div>
                     ))}
                   </div>
                 )}
-
-                <div className="profile-card">
-                  <h2 className="profile-card-title mb-4">Статистика</h2>
-                  <div className="stats-grid">
-                    <div className="stat-item">
-                      <span className="stat-number">{bookingsArray.length}</span>
-                      <span className="stat-label">Всего записей</span>
+                <div className="profileStat mb-0">
+                  <h2 className="profileStatTitle mb-4">Статистика</h2>
+                  <div className="statsBlock">
+                    <div className="stat">
+                      <div className="statNum">{bookingsArray.length}</div>
+                      <div className="statText">Всего записей</div>
                     </div>
-                    <div className="stat-item">
-                      <span className="stat-number">{daysWithUs}</span>
-                      <span className="stat-label">Дней с нами</span>
+                    <div className="stat">
+                      <div className="statNum">{daysWithUs}</div>
+                      <div className="statText">Дней с нами</div>
                     </div>
-                    <div className="stat-item">
-                      <span className="stat-number">{bookingsArray.length * 60}</span>
-                      <span className="stat-label">Минут тренировок</span>
+                    <div className="stat">
+                      <div className="statNum">{totalMinutes}</div>
+                      <div className="statText">Минут тренировок</div>
                     </div>
                   </div>
                 </div>

@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router";
 import { useAuth } from "../../AuthContext";
 
-function Yoga() {
+function Strength() {
   const { user, fetchBookings } = useAuth();
   const [notification, setNotification] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<{
@@ -12,24 +12,24 @@ function Yoga() {
   } | null>(null);
 
   const classData = {
-    id: "yoga",
-    name: "Йога",
+    id: "strength",
+    name: "Strength",
     description:
-      "Динамическая последовательность поз для развития силы, гибкости и осознанности. Подходит для всех уровней подготовки.",
-    duration: "45 мин",
-    capacity: "20",
-    difficulty: "Beginner",
+      "Нарастите мышечную массу и увеличьте силу с помощью нашей программы силовых тренировок.",
+    duration: "90 мин",
+    capacity: "10",
+    difficulty: "Intermediate",
     schedule: [
-      { day: "Понедельник", time: "07:00", instructor: "Анна Иванова" },
-      { day: "Среда", time: "18:00", instructor: "Анна Иванова" },
-      { day: "Пятница", time: "07:00", instructor: "Анна Иванова" },
+      { day: "Понедельник", time: "18:00", instructor: "Максим Петров" },
+      { day: "Среда", time: "18:00", instructor: "Максим Петров" },
+      { day: "Пятница", time: "18:00", instructor: "Максим Петров" },
     ],
-    instructor: "Анна Иванова",
+    instructor: "Максим Петров",
     benefits: [
-      "Улучшение гибкости",
-      "Снижение стресса",
-      "Укрепление мышц кора",
-      "Улучшение баланса",
+      "Рост мышечной массы",
+      "Увеличение силы",
+      "Улучшение метаболизма",
+      "Укрепление костей",
     ],
   };
 
@@ -49,7 +49,7 @@ function Yoga() {
   const upcomingSlots = useMemo(() => {
     const slots: { date: string; time: string; instructor: string }[] = [];
     const today = new Date();
-    const dayNames = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+    const dayNames = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
 
     for (let i = 0; i < 14; i++) {
       const date = new Date(today);
@@ -127,7 +127,7 @@ function Yoga() {
     <>
       {notification && <div className="notificationn">{notification}</div>}
       <div className="classBlock1">
-        <div className="classOverlay yogaIMG">
+        <div className="classOverlay strengthIMG">
           <div className="classContent">
             <Link to="/classes">
               <button className="btn-back">
@@ -226,4 +226,4 @@ function Yoga() {
   );
 }
 
-export default Yoga
+export default Strength

@@ -337,3 +337,84 @@ a:hover{
     font-size: 12px;
     font-weight: 300;
 }
+
+@media (max-width: 430px) {
+  .nav-direct {
+    padding-inline: 15px;
+  }
+  .headTxt {
+    font-size: 12px;
+  }
+  .headLogoText {
+    font-size: 16px;
+  }
+  .block1 {
+    height: 500px;
+    padding-inline: 15px;
+  }
+  .mainText {
+    font-size: 32px;
+  }
+  .miniMainText {
+    font-size: 16px;
+  }
+  .butt1, .butt2 {
+    width: 120px;
+    font-size: 14px;
+  }
+  .block2 {
+    padding-inline: 15px;
+  }
+  .whyText {
+    font-size: 24px;
+  }
+  .whyDesc {
+    font-size: 14px;
+  }
+  .whyTables {
+    flex-direction: column;
+    gap: 10px !important;
+    padding-bottom: 0 !important;
+  }
+  .miniTable {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 5%;
+  }
+  .block3 {
+    padding-inline: 15px;
+  }
+  .classesTables {
+    flex-direction: column;
+  }
+  .tablee {
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+  .tableBackImage1,
+  .tableBackImage2,
+  .tableBackImage3 {
+    height: 200px;
+  }
+  .block4 {
+    padding-inline: 15px;
+  }
+  .mainText1 {
+    font-size: 28px;
+  }
+  .miniMainText2 {
+    font-size: 16px;
+  }
+  .footerContacts {
+    padding-inline: 15px;
+  }
+  .footMain {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footMiniCont {
+    justify-content: start;
+    text-align: start;
+    margin-top: 15px;
+  }
+}

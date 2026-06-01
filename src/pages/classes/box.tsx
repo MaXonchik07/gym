@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router";
 import { useAuth } from "../../AuthContext";
 
-function Yoga() {
+function Box() {
   const { user, fetchBookings } = useAuth();
   const [notification, setNotification] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<{
@@ -11,27 +11,26 @@ function Yoga() {
     instructor: string;
   } | null>(null);
 
-  const classData = {
-    id: "yoga",
-    name: "Йога",
-    description:
-      "Динамическая последовательность поз для развития силы, гибкости и осознанности. Подходит для всех уровней подготовки.",
-    duration: "45 мин",
-    capacity: "20",
+const classData = {
+    id: "boxing",
+    name: "Бокс",
+    description: "Классическая ударная тренировка, развивающая координацию, скорость, выносливость и силу удара",
+    duration: "55 мин",
+    capacity: "14",
     difficulty: "Beginner",
     schedule: [
-      { day: "Понедельник", time: "07:00", instructor: "Анна Иванова" },
-      { day: "Среда", time: "18:00", instructor: "Анна Иванова" },
-      { day: "Пятница", time: "07:00", instructor: "Анна Иванова" },
+        { day: "Понедельник", time: "17:00", instructor: "Давид Томпсон" },
+        { day: "Среда", time: "17:00", instructor: "Давид Томпсон" },
+        { day: "Пятница", time: "17:00", instructor: "Давид Томпсон" },
     ],
-    instructor: "Анна Иванова",
+    instructor: "Давид Томпсон",
     benefits: [
-      "Улучшение гибкости",
-      "Снижение стресса",
-      "Укрепление мышц кора",
-      "Улучшение баланса",
+        "Высокая интенсивность",
+        "Развитие координации",
+        "Снятие стресса",
+        "Самооборона",
     ],
-  };
+};
 
   const showNotification = (msg: string) => {
     setNotification(msg);
@@ -49,7 +48,7 @@ function Yoga() {
   const upcomingSlots = useMemo(() => {
     const slots: { date: string; time: string; instructor: string }[] = [];
     const today = new Date();
-    const dayNames = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+    const dayNames = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
 
     for (let i = 0; i < 14; i++) {
       const date = new Date(today);
@@ -127,7 +126,7 @@ function Yoga() {
     <>
       {notification && <div className="notificationn">{notification}</div>}
       <div className="classBlock1">
-        <div className="classOverlay yogaIMG">
+        <div className="classOverlay boxIMG">
           <div className="classContent">
             <Link to="/classes">
               <button className="btn-back">
@@ -226,4 +225,4 @@ function Yoga() {
   );
 }
 
-export default Yoga
+export default Box

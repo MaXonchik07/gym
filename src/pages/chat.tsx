@@ -154,7 +154,7 @@ const Chat: React.FC<Props> = ({ recipientId, adminMode, recipientName }) => {
   return (
     <div className="chat-window">
       <div className="chat-header">
-        <span>{adminMode && recipientName ? `Диалог с ${recipientName}` : "Поддержка"}</span>
+        <div>{adminMode && recipientName ? `Диалог с ${recipientName}` : "Поддержка"}</div>
         {!adminMode && (
           <button className="chat-close" onClick={() => setIsOpen(false)}>✖</button>
         )}

@@ -7,7 +7,7 @@ export interface User {
   email: string;
   phone: string;
   joinDate: string;
-  membershipType: "Basic" | "Premium" | "Elite";
+  membershipType: "Базовый" | "Премиум" | "Элитный";
   role?: "user" | "admin";
 }
 
@@ -170,28 +170,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const fetchBookings = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-    try {
-      const res = await fetch("http://localhost:8081/api/bookings", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (res.ok) {
-        const data = await res.json();
-        if (Array.isArray(data)) {
-          setBookings(data);
-        } else {
-          setBookings([]);
-        }
+const fetchBookings = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+  try {
+    const res = await fetch("http://localhost:8081/api/bookings", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        // Преобразуем snake_case → camelCase
+        const normalized = data.map((b: any) => ({
+          id: b.id,
+          classId: b.class_id,
+          className: b.class_name,
+          instructor: b.instructor,
+          date: b.date,
+          time: b.time,
+        }));
+        setBookings(normalized);
       } else {
         setBookings([]);
       }
-    } catch (err) {
-      console.error("Failed to fetch bookings", err);
+    } else {
       setBookings([]);
     }
-  };
+  } catch (err) {
+    console.error("Failed to fetch bookings", err);
+    setBookings([]);
+  }
+};
 
   useEffect(() => {
     if (user) {

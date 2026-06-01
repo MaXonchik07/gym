@@ -1,38 +1,20 @@
-/* ---------- ОБЩИЕ КАРТОЧКИ (как в Profile) ---------- */
-.profile-card {
-  background: white;
-  border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.11);
-  padding: 3%;
-  margin-bottom: 1.5rem;
-}
-.profile-card-title {
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-}
-
-/* ---------- HERO-СЕКЦИЯ ---------- */
-.class-hero {
+.classBlock1{
   position: relative;
   height: 400px;
   background-size: cover;
   background-position: center;
   color: white;
 }
-.class-hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3), transparent);
+.classOverlay{
   display: flex;
   align-items: flex-end;
   padding-inline: 200px;
   padding-bottom: 3%;
 }
-.class-hero-content {
+.classContent{
   width: 100%;
 }
-.btn-back {
+.btn-back{
   background: rgba(255,255,255,0.15);
   border: 1px solid rgba(255,255,255,0.3);
   color: white;
@@ -41,102 +23,98 @@
   font-size: 0.95rem;
   margin-bottom: 1rem;
   cursor: pointer;
-  transition: background 0.2s;
 }
-.btn-back:hover {
+.btn-back:hover{
   background: rgba(255,255,255,0.25);
 }
-.class-hero-title {
+.classTitle{
   font-size: xx-large;
   font-weight: 800;
   margin-bottom: 0.5rem;
 }
-.class-hero-badges {
+.classBadge{
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
 }
-
-/* ---------- КОНТЕЙНЕР ---------- */
-.class-container {
+.classBlock2{
   padding-inline: 200px;
   padding-top: 3%;
   padding-bottom: 3%;
 }
-
-/* ---------- БЕЙДЖИ ---------- */
-.badge {
-  display: inline-block;
-  padding: 0.25em 0.75em;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 12px;
-  line-height: 1.4;
+.badgeBeginner{ 
+  background: #dcfce7;
+   color: #166534; 
+  }
+.badgeIntermediate{ 
+  background: #fef9c3; 
+  color: #854d0e; 
 }
-.badge-beginner { background: #dcfce7; color: #166534; }
-.badge-intermediate { background: #fef9c3; color: #854d0e; }
-.badge-advanced { background: #fee2e2; color: #991b1b; }
-.badge-all { background: #dbeafe; color: #1e40af; }
-.badge-secondary { background: #f3f4f6; color: #1f2937; }
-
-/* ---------- ОПИСАНИЕ ---------- */
-.class-description {
+.badgeAdvanced{ 
+  background: #fee2e2; 
+  color: #991b1b; 
+}
+.badgeComm{ 
+  background: #f3f4f6; 
+  color: #1f2937; 
+}
+.class-description{
   color: #374151;
   line-height: 1.7;
 }
-
-/* ---------- ПРЕИМУЩЕСТВА ---------- */
-.benefits-grid {
+.benefits-grid{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
-.benefit-item {
+.benefit-item{
   display: flex;
   align-items: center;
   gap: 0.75rem;
   font-size: 0.95rem;
 }
-.benefit-icon {
+.benefit-icon{
   font-size: 1.2rem;
 }
-
-/* ---------- САЙДБАР ---------- */
 .sidebar-info {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
 }
-.info-item-sidebar {
+.info-item-sidebar{
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
   color: #374151;
 }
-.icon-emoji {
-  font-size: 18px;
-  width: 18px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #6b7280;
+.classIcon1{
+  background-image: url(/images/HoursRed.png);
 }
-.sidebar-rules {
+.classIcon2{
+  background-image: url(/images/peopleRed.png);
+}
+.classIcon3{
+  background-image: url(/images/LevelRed.png);
+}
+.classIcon4{
+  background-image: url(/images/medal.png);
+  width: 30px;
+  height: 30px;
+}
+.sidebar-rules{
   border-top: 1px solid #e5e7eb;
   padding-top: 1.2rem;
   margin-top: 1.2rem;
   font-size: 0.85rem;
   color: #4b5563;
 }
-.sidebar-rules ul {
+.sidebar-rules ul{
   padding-left: 1.2rem;
   margin: 0;
 }
-
-/* ---------- КНОПКИ ---------- */
-.btn-red {
+.btn-red{
   background-color: #dc2626;
   color: white;
   border: none;
@@ -145,35 +123,19 @@
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 }
-.btn-red:disabled {
+.btn-red:disabled{
   opacity: 0.6;
   cursor: not-allowed;
 }
-.btn-red:hover:not(:disabled) {
+.btn-red:hover:not(:disabled){
   background-color: #b91c1c;
 }
-.btn-outline-red {
-  background: white;
-  color: #dc2626;
-  border: 1px solid #dc2626;
-  border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-}
-.btn-outline-red:hover {
-  background: #fef2f2;
-}
-.vertical-slots-container {
+.vertical-slots-container{
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -181,19 +143,19 @@
   overflow-y: auto;
   padding-right: 0.5rem;
 }
-.vertical-slots-container::-webkit-scrollbar {
+.vertical-slots-container::-webkit-scrollbar{
   width: 6px;
 }
-.vertical-slots-container::-webkit-scrollbar-thumb {
+.vertical-slots-container::-webkit-scrollbar-thumb{
   background: #d1d5db;
   border-radius: 3px;
 }
-.vertical-slot-card.active {
+.vertical-slot-card.active{
   border-color: #dc2626;
   background: #fef2f2;
   box-shadow: 0 0 0 1px #dc2626;
 }
-.vertical-slot-card {
+.vertical-slot-card{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -204,20 +166,18 @@
   cursor: pointer;
   transition: all 0.2s;
 }
-.vertical-slot-card:hover {
+.vertical-slot-card:hover{
   border-color: #dc2626;
   background: #fef2f2;
   transform: translateX(4px);
   box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
 }
-
-.slot-left {
+.slot-left{
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
-
-.slot-date {
+.slot-date{
   display: flex;
   align-items: baseline;
   gap: 0.5rem;
@@ -227,18 +187,16 @@
   font-weight: 600;
   color: #6b7280;
 }
-.slot-date-num {
+.slot-date-num{
   font-size: 1.2rem;
   font-weight: bold;
   color: #111827;
 }
-
-.slot-instructor {
+.slot-instructor{
   font-size: 0.8rem;
   color: #6b7280;
 }
-
-.slot-time-right {
+.slot-time-right{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -249,43 +207,135 @@
   font-weight: bold;
   color: #dc2626;
 }
-
-/* ---------- УВЕДОМЛЕНИЕ (кастомный toast) ---------- */
-.custom-toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #333;
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 9999;
-  animation: fadeInOut 3s ease forwards;
-}
-@keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(20px); }
-  10% { opacity: 1; transform: translateY(0); }
-  90% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(20px); }
-}
-
-/* ---------- АДАПТИВНОСТЬ ---------- */
-@media (max-width: 992px) {
-  .class-hero-overlay,
-  .class-container {
-    padding-inline: 20px;
-  }
-  .benefits-grid {
-    grid-template-columns: 1fr;
-  }
-}
 .yogaIMG{
-  background: url("/images/Yoga.png");
+  background-image: url("/images/Yoga.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   width: 100%;
   height: 400px;
   overflow: hidden;
+}
+.strengthIMG{
+  background-image: url("/images/Strength.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+.cardioIMG{
+  background-image: url("/images/Cardio.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+.boxIMG{
+  background-image: url("/images/Box.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+.hiitIMG{
+  background-image: url("/images/HIIT.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+.cyclingIMG{
+  background-image: url("/images/Bicycle.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+.acroYogaIMG{
+  background-image: url("/images/SuperYoga.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+.bodyweightIMG{
+  background-image: url("/images/OwnWeight.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+.fullbodyIMG{
+  background-image: url("/images/Fullbody.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+@media (max-width: 430px) {
+  .classOverlay {
+    padding-inline: 15px;
+  }
+  .classTitle {
+    font-size: 28px;
+  }
+  .btn-back {
+    font-size: 14px;
+    padding: 0.4rem 1rem;
+  }
+  .classBlock2 {
+    padding-inline: 15px;
+  }
+  .classBlock2 .row {
+    flex-direction: column;
+  }
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  .vertical-slots-container {
+    max-height: 350px;
+  }
+  .slot-time-text {
+    font-size: 1.2rem;
+  }
+  .slot-instructor {
+    font-size: 0.7rem;
+  }
+  .bodyweightIMG,
+  .hiitIMG,
+  .yogaIMG,
+  .fullbodyIMG{
+    background-position: -225px;
+  }
+  .strengthIMG{
+    background-position: -175px;
+  }
+  .cardioIMG{
+    background-position: -175px;
+  }
+  .boxIMG{
+    background-position: -130px;
+  }
+  .cyclingIMG{
+    background-position: -120px;
+  }
+  .acroYogaIMG{
+    background-position: -125px;
+  }
+  .classBlock2Media{
+    gap: 0 !important;
+  }
+  #slots-section{
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
 }
