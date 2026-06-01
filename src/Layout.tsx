@@ -1,19 +1,26 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "./pages/header";
 import Footer from "./pages/footer";
 import { useAuth } from "./AuthContext";
 import Chat from "./pages/chat";
+import { useEffect } from "react";
 
-function Layout(){
+function Layout() {
     const { user } = useAuth();
-    return(
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return (
         <>
-            <Header/>
+            <Header />
             <main className="content">
-                <Outlet/>
+                <Outlet />
                 {user?.role !== "admin" && <Chat />}
             </main>
-            <Footer/>
+            <Footer />
         </>
     )
 }

@@ -96,3 +96,35 @@
     text-align: center;
     font-weight: 500;
 }
+
+@media (max-width: 430px) {
+  .auth {
+    width: 90%;
+    padding: 3%;
+  }
+  .authBT {
+    font-size: 18px;
+  }
+  .authT {
+    font-size: 12px;
+  }
+  .closeButt {
+    font-size: 28px;
+  }
+  .submitButt {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .authInput {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .authToRegButt {
+    flex-direction: column;
+    align-items: center;
+  }
+  .linkButt {
+    padding: 0;
+    margin-top: 5px;
+  }
+}

@@ -71,7 +71,7 @@ function Yoga() {
   }, [classData.schedule]);
 
   const handleBook = async () => {
-    if (!user) {
+    if (!user || user.role === "admin") {
       showNotification("Пожалуйста, войдите в систему для записи");
       return;
     }
